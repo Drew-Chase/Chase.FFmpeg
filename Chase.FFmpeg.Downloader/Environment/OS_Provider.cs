@@ -21,23 +21,36 @@ public static class OS_Provider
             if (OperatingSystem.IsLinux())
             {
                 name.Append("linux");
-                if (IsARM64)
+                if (IsARM)
                 {
-                    name.Append("-arm64");
-                }
-                else
-                {
-                    // ARM hardware float / ARM 32 bit processors
-                    name.Append("-armhf");
+                    if (IsARM64)
+                    {
+                        name.Append("-arm64");
+                    }
+                    else
+                    {
+                        // ARM hardware float / ARM 32 bit processors
+                        name.Append("-armhf");
+                    }
                 }
             }
             else if (OperatingSystem.IsWindows())
             {
-                name.Append("windows-64");
+                name.Append("windows");
             }
             else if (OperatingSystem.IsMacOS())
             {
-                name.Append("osx-64");
+                name.Append("osx");
+            }
+
+
+            if (Is64)
+            {
+                name.Append("-64");
+            }
+            else
+            {
+                name.Append("-32");
             }
 
             return name.ToString();
