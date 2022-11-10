@@ -20,7 +20,7 @@ public struct AudioStreamInfo
     /// <summary>
     /// The channel layout of the audio stream
     /// </summary>
-    public float ChannelLayout { get; private set; }
+    public string ChannelLayout { get; private set; }
     /// <summary>
     /// The size in bytes of the audio stream
     /// </summary>
@@ -30,7 +30,7 @@ public struct AudioStreamInfo
     /// </summary>
     public uint Channels { get; private set; }
 
-    internal AudioStreamInfo(string codec, uint sampleRate, string sampleFormat, float channelLayout, uint size, uint channels)
+    internal AudioStreamInfo(string codec, uint sampleRate, string sampleFormat, string channelLayout, uint size, uint channels)
     {
         Codec = codec;
         SampleRate = sampleRate;
