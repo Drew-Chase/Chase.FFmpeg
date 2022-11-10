@@ -1,4 +1,5 @@
-﻿using Chase.FFmpeg.Info;
+﻿using Chase.FFmpeg.Events;
+using Chase.FFmpeg.Info;
 using System.Diagnostics;
 using System.Text;
 
@@ -12,21 +13,44 @@ public sealed class MuxedConverter
     {
         return new(info);
     }
+
+    /// <summary>
+    /// Changes the video codec
+    /// </summary>
+    /// <param name="codec"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeVideoCodec(string codec)
     {
         _postInputBuilder.Append($" -c:v {codec} ");
         return this;
     }
+
+    /// <summary>
+    /// Changes the audio codec
+    /// </summary>
+    /// <param name="codec"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeAudioCodec(string codec)
     {
         _postInputBuilder.Append($" -c:a {codec} ");
         return this;
     }
+    /// <summary>
+    /// Changes the video bitrate
+    /// </summary>
+    /// <param name="bitrate"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeVideoBitrate(string bitrate)
     {
         _postInputBuilder.Append($" -b:v {bitrate}");
         return this;
     }
+
+    /// <summary>
+    /// Changes the audio bitrate
+    /// </summary>
+    /// <param name="bitrate"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeAudioBitrate(string bitrate)
     {
         _postInputBuilder.Append($" -b:a {bitrate} ");
@@ -70,31 +94,103 @@ public sealed class MuxedConverter
     }
 
     /// <summary>
-    /// 
+    /// Check <seealso cref="SupportedHardwareAccelerationMethods"/> for list of supported methods.
     /// </summary>
-    /// <param name="device"></param>
+    /// <param name="method"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeHardwareAccelerationDevice(string device = "auto")
+    public MuxedConverter ChangeHardwareAccelerationMethod(string method = "auto")
     {
-        _preInputBuilder.Append($" -hwaccel {device} ");
+        _preInputBuilder.Append($" -hwaccel {method} ");
         return this;
     }
 
+    /// <summary>
+    /// Overwrites oringal file
+    /// </summary>
+    /// <returns></returns>
     public MuxedConverter OverwriteOriginal()
     {
         _preInputBuilder.Append(" -y ");
         return this;
     }
 
-    public void Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler? exited) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), data_handler, exited);
+    /// <summary>
+    /// Changes the pixel format of the video
+    /// </summary>
+    /// <param name="format"></param>
+    /// <returns></returns>
+    public MuxedConverter ChangePixelFormat(string format)
+    {
+        _postInputBuilder.Append($" -pix_fmt {format} ");
+        return this;
+    }
 
-    public string Build(string output_file) => $"{_preInputBuilder.ToString().Trim()} -i \"{Info.Path}\" {_postInputBuilder} -vf \"{_videoFormat.ToString().Trim()}\" \"{output_file.Trim()}\"".Replace("  ", " ").Trim();
+    public MuxedConverter ChangeStartPosition(string position)
+    {
+        _preInputBuilder.Append($" -ss {position}");
+        return this;
+    }
+    public MuxedConverter ChangeVideoDuration(string position)
+    {
+        _postInputBuilder.Append($" -t {position}");
+        return this;
+    }
+
+    /// <summary>
+    /// Adds an argument after the input option
+    /// </summary>
+    /// <param name="option"></param>
+    /// <returns></returns>
+    public MuxedConverter AddCustomPostInputOption(string option)
+    {
+        _postInputBuilder.Append($" {option} ");
+        return this;
+    }
+
+    /// <summary>
+    /// Adds an argument before the input option
+    /// </summary>
+    /// <param name="option"></param>
+    /// <returns></returns>
+    public MuxedConverter AddCustomPreInputOption(string option)
+    {
+        _preInputBuilder.Append($" {option} ");
+        return this;
+    }
+
+
+    /// <summary>
+    /// Adds a video format option
+    /// </summary>
+    /// <param name="option"></param>
+    /// <returns></returns>
+    public MuxedConverter AddCustomVideoFormatOption(string option)
+    {
+        _videoFormat.Append($" {option} ");
+        return this;
+    }
+    /// <summary>
+    /// Builds the ffmpeg argument and starts the convertion proess
+    /// </summary>
+    /// <param name="output_file"></param>
+    /// <param name="data_handler"></param>
+    /// <param name="exited"></param>
+    /// <param name="updated"></param>
+    public void Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler? exited, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, exited, updated);
+
+    /// <summary>
+    /// Builds and returns the ffmpeg argument
+    /// </summary>
+    /// <param name="output_file"></param>
+    /// <returns></returns>
+    public string Build(string output_file) => $"{_preInputBuilder.ToString().Trim()} -i \"{Info.Path}\" {_postInputBuilder} {(!string.IsNullOrWhiteSpace(_videoFormat.ToString()) ? $"-vf \"{_videoFormat.ToString().Trim()}\"" : "")} \"{output_file.Trim()}\"".Replace("  ", " ").Trim();
 
     private MuxedConverter(MediaInfo info)
     {
         _preInputBuilder = new StringBuilder();
         _postInputBuilder = new StringBuilder();
         _videoFormat = new StringBuilder();
+
         Info = info;
     }
 }
