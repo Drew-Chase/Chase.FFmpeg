@@ -45,14 +45,15 @@ public sealed class MediaInfo
     /// General media information
     /// </summary>
     /// <param name="file"></param>
-    public MediaInfo(string file)
+    /// <param name="useQuickMath">If the percentage should be calculated by the duration * framerate or by getting the exact frame count from ffprobe</param>
+    public MediaInfo(string file, bool useQuickMath = true)
     {
         FileInfo info = new(file);
         Size = (ulong)info.Length;
         Filename = info.Name;
         Path = file;
         StringBuilder jsonBuilder = new();
-        FFProcessHandler.ExecuteFFprobe($"-loglevel 0 -print_format json -show_format -show_streams \"{file}\"", (s, e) =>
+        FFProcessHandler.ExecuteFFprobe($"-loglevel 0 -print_format json -show_format -show_streams {(useQuickMath ? "" : "-count_frames")} \"{file}\"", (s, e) =>
         {
             string? content = e.Data;
             if (!string.IsNullOrWhiteSpace(content))
@@ -128,13 +129,21 @@ public sealed class MediaInfo
                     framerate = (double)parts[0] / parts[1];
                 }
 
+                if (!useQuickMath && stream["nb_read_frames"] != null)
+                {
+                    frames = Convert.ToUInt32(stream["nb_read_frames"]);
+                }
+                else
+                {
+                    frames = (uint)(framerate * Duration);
+                }
+
                 VideoStream = new(frames, bit_rate, width, height, pixel_format, framerate, aspect_ratio, codec);
             }
             else if (codec_type.ToLower().Equals("audio"))
             {
                 uint size = 0, sample_rate = 0, channels = 0;
-                string codec = "", sample_format = "";
-                float channel_layout = 0f;
+                string codec = "", sample_format = "", channel_layout = "";
 
                 if (stream["codec_name"] != null)
                 {
@@ -150,7 +159,7 @@ public sealed class MediaInfo
                 }
                 if (stream["channel_layout"] != null)
                 {
-                    channel_layout = Convert.ToSingle((string)stream["channel_layout"]);
+                    channel_layout = (string)stream["channel_layout"];
                 }
                 if (stream["extradata_size"] != null)
                 {
