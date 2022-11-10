@@ -8,7 +8,7 @@ public class SupportedHardwareAccelerationMethods
     private SupportedHardwareAccelerationMethods()
     {
         List<string> methods = new();
-        FFProcessHandler.ExecuteFFmpeg("-hide_banner -hwaccels", (s, e) =>
+        FFProcessHandler.ExecuteFFmpeg("-hide_banner -hwaccels", null, (s, e) =>
         {
             string? content = e.Data;
             if (!string.IsNullOrWhiteSpace(content))
