@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chase.FFmpeg.Downloader</name>
+    </assembly>
+    <members>
+        <member name="T:Chase.FFmpeg.Downloader.Environment.OS_Provider">
+            <summary>
+            Gives utility variables for the current operating system
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Name">
+            <summary>
+            The ffmpeg friendly name for the systems cpu architecture and Operating System name
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM">
+            <summary>
+            If the processor is ARM based or not
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM64">
+            <summary>
+            If the processor is ARM 64 bit or not
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM32">
+            <summary>
+            If the processor is ARM 32 bit or not
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Is64">
+            <summary>
+            If the processor is AMD 64 bit
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Is32">
+            <summary>
+            If the processor is Intel i386 32 bit processor
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.GetLatest(System.String)">
+            <summary>
+            Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...
+            </summary>
+            <param name="directory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.GetArchive(System.Uri)">
+            <summary>
+            Downloads the archive file from the remote server.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.Unzip(System.String)">
+            <summary>
+            Unzips archive in-place.
+            </summary>
+            <param name="archive"></param>
+        </member>
+        <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.CreateVersionFile">
+            <summary>
+            Creates the version file with the remote version
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.GetCurrentVersion">
+            <summary>
+            Gets the current version or creates a version file if none is found.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
