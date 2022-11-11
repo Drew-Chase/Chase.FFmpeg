@@ -18,8 +18,8 @@ MediaInfo info = new MediaInfo("/path/to/media.mkv");
 MuxedConverter converter = MuxedConverter.SetMedia(info)
 ```
 # Muxed converter options
+## Changes the video codec
 ```csharp
-/// Changes the video codec
 .ChangeVideoCodec("h264_nvenc")
 ```
 ## Changes the video bitrate
