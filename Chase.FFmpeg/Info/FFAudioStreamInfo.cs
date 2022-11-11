@@ -3,7 +3,7 @@
 /// <summary>
 /// Stores information about the audio stream
 /// </summary>
-public struct AudioStreamInfo
+public struct FFAudioStreamInfo
 {
     /// <summary>
     /// The codec that the audio stream was encoded with
@@ -30,7 +30,7 @@ public struct AudioStreamInfo
     /// </summary>
     public uint Channels { get; private set; }
 
-    internal AudioStreamInfo(string codec, uint sampleRate, string sampleFormat, string channelLayout, uint size, uint channels)
+    internal FFAudioStreamInfo(string codec, uint sampleRate, string sampleFormat, string channelLayout, uint size, uint channels)
     {
         Codec = codec;
         SampleRate = sampleRate;

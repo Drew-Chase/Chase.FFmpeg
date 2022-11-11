@@ -6,7 +6,7 @@ namespace Chase.FFmpeg.Info;
 /// <summary>
 /// Class for compiling and handling general media information
 /// </summary>
-public sealed class MediaInfo
+public sealed class FFMediaInfo
 {
     /// <summary>
     /// The size of the file in bytes
@@ -35,18 +35,18 @@ public sealed class MediaInfo
     /// <summary>
     /// The video stream information
     /// </summary>
-    public VideoStreamInfo VideoStream { get; private set; }
+    public FFVideoStreamInfo VideoStream { get; private set; }
     /// <summary>
     /// The audio stream information
     /// </summary>
-    public AudioStreamInfo AudioStream { get; private set; }
+    public FFAudioStreamInfo AudioStream { get; private set; }
 
     /// <summary>
     /// General media information
     /// </summary>
     /// <param name="file"></param>
     /// <param name="useQuickMath">If the percentage should be calculated by the duration * framerate or by getting the exact frame count from ffprobe</param>
-    public MediaInfo(string file, bool useQuickMath = true)
+    public FFMediaInfo(string file, bool useQuickMath = true)
     {
         FileInfo info = new(file);
         Size = (ulong)info.Length;

@@ -3,19 +3,19 @@
 /// <summary>
 /// Adds functions getting Supported Hardware Acceleration Methods
 /// </summary>
-public class SupportedHardwareAccelerationMethods
+public class FFSupportedHardwareAccelerationMethods
 {
     /// <summary>
-    /// Singleton pattern for SupportedHardwareAccelerationMethods
+    /// Singleton pattern for FFSupportedHardwareAccelerationMethods
     /// </summary>
-    public static readonly SupportedHardwareAccelerationMethods Instance = Instance ??= new();
+    public static readonly FFSupportedHardwareAccelerationMethods Instance = Instance ??= new();
 
     /// <summary>
     /// An array of supported methods
     /// </summary>
     public string[] Methods { get; private set; }
 
-    private SupportedHardwareAccelerationMethods()
+    private FFSupportedHardwareAccelerationMethods()
     {
         List<string> methods = new();
         FFProcessHandler.ExecuteFFmpeg("-hide_banner -hwaccels", null, (s, e) =>

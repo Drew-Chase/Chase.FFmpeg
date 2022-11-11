@@ -1,4 +1,4 @@
 ﻿namespace Chase.FFmpeg.Converters;
-internal class AudioConverter
+internal class FFVideoConverter
 {
 }

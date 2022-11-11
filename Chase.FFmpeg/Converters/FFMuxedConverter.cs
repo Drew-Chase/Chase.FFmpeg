@@ -8,12 +8,12 @@ namespace Chase.FFmpeg.Converters;
 /// <summary>
 /// For converting video and audio streams
 /// </summary>
-public sealed class MuxedConverter
+public sealed class FFMuxedConverter
 {
     /// <summary>
     /// The input file
     /// </summary>
-    public MediaInfo Info { get; private set; }
+    public FFMediaInfo Info { get; private set; }
     private readonly StringBuilder _postInputBuilder, _preInputBuilder, _videoFormat;
 
     /// <summary>
@@ -21,7 +21,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="info"></param>
     /// <returns></returns>
-    public static MuxedConverter SetMedia(MediaInfo info)
+    public static FFMuxedConverter SetMedia(FFMediaInfo info)
     {
         return new(info);
     }
@@ -31,7 +31,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="codec"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeVideoCodec(string codec)
+    public FFMuxedConverter ChangeVideoCodec(string codec)
     {
         _postInputBuilder.Append($" -c:v {codec} ");
         return this;
@@ -42,7 +42,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="codec"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeAudioCodec(string codec)
+    public FFMuxedConverter ChangeAudioCodec(string codec)
     {
         _postInputBuilder.Append($" -c:a {codec} ");
         return this;
@@ -52,7 +52,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="bitrate"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeVideoBitrate(string bitrate)
+    public FFMuxedConverter ChangeVideoBitrate(string bitrate)
     {
         _postInputBuilder.Append($" -b:v {bitrate}");
         return this;
@@ -63,7 +63,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="bitrate"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeAudioBitrate(string bitrate)
+    public FFMuxedConverter ChangeAudioBitrate(string bitrate)
     {
         _postInputBuilder.Append($" -b:a {bitrate} ");
         return this;
@@ -76,7 +76,7 @@ public sealed class MuxedConverter
     /// <param name="width"></param>
     /// <param name="height"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeResolution(int width, int height)
+    public FFMuxedConverter ChangeResolution(int width, int height)
     {
         _videoFormat.Append($" scale={width}:{height} ");
         return this;
@@ -88,7 +88,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="width"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeWidth(int width)
+    public FFMuxedConverter ChangeWidth(int width)
     {
         _videoFormat.Append($" scale={width}:-1 ");
         return this;
@@ -99,18 +99,18 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="height"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeHeight(int height)
+    public FFMuxedConverter ChangeHeight(int height)
     {
         _videoFormat.Append($" scale=-1:{height} ");
         return this;
     }
 
     /// <summary>
-    /// Check <seealso cref="SupportedHardwareAccelerationMethods"/> for list of supported methods.
+    /// Check <seealso cref="FFSupportedHardwareAccelerationMethods"/> for list of supported methods.
     /// </summary>
     /// <param name="method"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeHardwareAccelerationMethod(string method = "auto")
+    public FFMuxedConverter ChangeHardwareAccelerationMethod(string method = "auto")
     {
         _preInputBuilder.Append($" -hwaccel {method} ");
         return this;
@@ -120,7 +120,7 @@ public sealed class MuxedConverter
     /// Overwrites oringal file
     /// </summary>
     /// <returns></returns>
-    public MuxedConverter OverwriteOriginal()
+    public FFMuxedConverter OverwriteOriginal()
     {
         _preInputBuilder.Append(" -y ");
         return this;
@@ -131,7 +131,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="format"></param>
     /// <returns></returns>
-    public MuxedConverter ChangePixelFormat(string format)
+    public FFMuxedConverter ChangePixelFormat(string format)
     {
         _postInputBuilder.Append($" -pix_fmt {format} ");
         return this;
@@ -142,7 +142,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeStartPosition(string position)
+    public FFMuxedConverter ChangeStartPosition(string position)
     {
         _preInputBuilder.Append($" -ss {position}");
         return this;
@@ -153,7 +153,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
-    public MuxedConverter ChangeVideoDuration(string position)
+    public FFMuxedConverter ChangeVideoDuration(string position)
     {
         _postInputBuilder.Append($" -t {position}");
         return this;
@@ -164,7 +164,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
-    public MuxedConverter AddCustomPostInputOption(string option)
+    public FFMuxedConverter AddCustomPostInputOption(string option)
     {
         _postInputBuilder.Append($" {option} ");
         return this;
@@ -175,7 +175,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
-    public MuxedConverter AddCustomPreInputOption(string option)
+    public FFMuxedConverter AddCustomPreInputOption(string option)
     {
         _preInputBuilder.Append($" {option} ");
         return this;
@@ -187,7 +187,7 @@ public sealed class MuxedConverter
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
-    public MuxedConverter AddCustomVideoFormatOption(string option)
+    public FFMuxedConverter AddCustomVideoFormatOption(string option)
     {
         _videoFormat.Append($" {option} ");
         return this;
@@ -208,7 +208,7 @@ public sealed class MuxedConverter
     /// <returns></returns>
     public string Build(string output_file) => $"{_preInputBuilder.ToString().Trim()} -i \"{Info.Path}\" {_postInputBuilder} {(!string.IsNullOrWhiteSpace(_videoFormat.ToString()) ? $"-vf \"{_videoFormat.ToString().Trim()}\"" : "")} \"{output_file.Trim()}\"".Replace("  ", " ").Trim();
 
-    private MuxedConverter(MediaInfo info)
+    private FFMuxedConverter(FFMediaInfo info)
     {
         _preInputBuilder = new StringBuilder();
         _postInputBuilder = new StringBuilder();
@@ -217,4 +217,4 @@ public sealed class MuxedConverter
         Info = info;
     }
 }
-// MuxedConverter.SetMedia().ChangeFramerate(15).ChangeResolution(800,600).ChangeCodec("h264_nvenc")
+// FFMuxedConverter.SetMedia().ChangeFramerate(15).ChangeResolution(800,600).ChangeCodec("h264_nvenc")

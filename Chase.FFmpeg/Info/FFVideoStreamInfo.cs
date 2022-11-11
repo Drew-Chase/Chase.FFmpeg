@@ -3,7 +3,7 @@
 /// <summary>
 /// Stores information about the video stream
 /// </summary>
-public struct VideoStreamInfo
+public struct FFVideoStreamInfo
 {
     /// <summary>
     /// The number of frames in a video
@@ -42,7 +42,7 @@ public struct VideoStreamInfo
     /// The name of the codec used to encode the video stream
     /// </summary>
     public string Codec { get; private set; }
-    internal VideoStreamInfo(ulong frames, ulong bit_rate, uint width, uint height, string pixel_format, double framerate, string aspect_ratio, string codec)
+    internal FFVideoStreamInfo(ulong frames, ulong bit_rate, uint width, uint height, string pixel_format, double framerate, string aspect_ratio, string codec)
     {
         Frames = frames;
         BitRate = bit_rate;
