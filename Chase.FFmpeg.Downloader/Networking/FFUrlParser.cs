@@ -13,8 +13,8 @@ internal sealed class FFUrlParser
         JObject json = GetJson();
 
         Version = (string)json["version"];
-        FFmpeg = new((string)json["bin"][OS_Provider.Name]["ffmpeg"]);
-        FFprobe = new((string)json["bin"][OS_Provider.Name]["ffprobe"]);
+        FFmpeg = new((string)json["bin"][FFOSProvider.Name]["ffmpeg"]);
+        FFprobe = new((string)json["bin"][FFOSProvider.Name]["ffprobe"]);
     }
 
     private JObject GetJson()
