@@ -10,6 +10,7 @@ public sealed class FFmpegDownloader
     private string _directory, _version;
     public string FFmpegExecutable { get; private set; }
     public string FFprobeExecutable { get; private set; }
+    public string FFmpegVersion { get; private set; }
     /// <summary>
     /// Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...
     /// </summary>
@@ -19,10 +20,9 @@ public sealed class FFmpegDownloader
     {
         _directory = directory = Directory.CreateDirectory(directory).FullName;
         _version = Path.Combine(directory, "version.json");
-
+        FFmpegVersion = FFUrlParser.Instance.Version;
         if (File.Exists(_version))
         {
-
             /// Checks if the remote version is different from the local one...
             if (GetCurrentVersion() != FFUrlParser.Instance.Version)
             {
@@ -63,7 +63,6 @@ public sealed class FFmpegDownloader
     /// Downloads the archive file from the remote server.
     /// </summary>
     /// <param name="url"></param>
-    /// <param name="directory"></param>
     /// <returns></returns>
     private async Task<string> GetArchive(Uri url)
     {
@@ -95,7 +94,6 @@ public sealed class FFmpegDownloader
     /// <summary>
     /// Creates the version file with the remote version
     /// </summary>
-    /// <param name="directory"></param>
     private void CreateVersionFile()
     {
         using FileStream fs = new(Path.Combine(_directory, "version.json"), FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -109,7 +107,6 @@ public sealed class FFmpegDownloader
     /// <summary>
     /// Gets the current version or creates a version file if none is found.
     /// </summary>
-    /// <param name="directory"></param>
     /// <returns></returns>
     public string GetCurrentVersion()
     {
