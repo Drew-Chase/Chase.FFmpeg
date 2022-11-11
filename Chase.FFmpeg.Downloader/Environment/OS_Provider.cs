@@ -6,7 +6,7 @@ namespace Chase.FFmpeg.Downloader.Environment;
 /// <summary>
 /// Gives utility variables for the current operating system
 /// </summary>
-public static class OS_Provider
+internal static class OS_Provider
 {
 
     /// <summary>
