@@ -1,8 +1,18 @@
 ﻿namespace Chase.FFmpeg.Info;
 
+/// <summary>
+/// Adds functions getting Supported Hardware Acceleration Methods
+/// </summary>
 public class SupportedHardwareAccelerationMethods
 {
-    public static SupportedHardwareAccelerationMethods Instance = Instance ??= new();
+    /// <summary>
+    /// Singleton pattern for SupportedHardwareAccelerationMethods
+    /// </summary>
+    public static readonly SupportedHardwareAccelerationMethods Instance = Instance ??= new();
+
+    /// <summary>
+    /// An array of supported methods
+    /// </summary>
     public string[] Methods { get; private set; }
 
     private SupportedHardwareAccelerationMethods()

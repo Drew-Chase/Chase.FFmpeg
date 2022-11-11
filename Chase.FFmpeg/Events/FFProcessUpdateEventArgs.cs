@@ -1,5 +1,8 @@
 ﻿namespace Chase.FFmpeg.Events;
 
+/// <summary>
+/// Runs when ffmpeg changes conversion status
+/// </summary>
 public class FFProcessUpdateEventArgs : EventArgs
 {
     /// <summary>

@@ -66,7 +66,7 @@ public sealed class MediaInfo
 
         // Media Format
         ulong bit_rate = 0;
-        JObject format = (JObject)json["format"];
+        JObject? format = (JObject)json["format"];
         if (format != null)
         {
             if (format["bit_rate"] != null)

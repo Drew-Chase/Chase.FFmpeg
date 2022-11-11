@@ -4,13 +4,31 @@ using System.IO.Compression;
 
 namespace Chase.FFmpeg.Downloader;
 
+/// <summary>
+/// Handles downloading the latest version of ffmpeg
+/// </summary>
 public sealed class FFmpegDownloader
 {
-    public static FFmpegDownloader Instance = Instance ??= new();
-    private string _directory, _version;
-    public string FFmpegExecutable { get; private set; }
-    public string FFprobeExecutable { get; private set; }
-    public string FFmpegVersion { get; private set; }
+    /// <summary>
+    /// Singleton pattern for FFmpegDownloader
+    /// </summary>
+    public static readonly FFmpegDownloader Instance = Instance ??= new();
+    private string _directory = "", _version = "";
+    /// <summary>
+    /// The absolute path to the ffmpeg executable<br />
+    /// <code>Example: /path/to/ffmpeg.exe</code>
+    /// </summary>
+    public string FFmpegExecutable { get; private set; } = "";
+
+    /// <summary>
+    /// The absolute path to the ffprobe executable<br />
+    /// <code>Example: /path/to/ffprobe.exe</code>
+    /// </summary>
+    public string FFprobeExecutable { get; private set; } = "";
+    /// <summary>
+    /// The currently installed version of ffmpeg
+    /// </summary>
+    public string FFmpegVersion { get; private set; } = "";
     /// <summary>
     /// Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...
     /// </summary>
@@ -23,7 +41,7 @@ public sealed class FFmpegDownloader
         FFmpegVersion = FFUrlParser.Instance.Version;
         if (File.Exists(_version))
         {
-            /// Checks if the remote version is different from the local one...
+            // Checks if the remote version is different from the local one...
             if (GetCurrentVersion() != FFUrlParser.Instance.Version)
             {
                 bool _ffmpeg_exists = Directory.GetFiles(directory, "ffmpeg*", SearchOption.TopDirectoryOnly).Any();

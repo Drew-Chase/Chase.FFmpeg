@@ -39,6 +39,33 @@
             If the processor is Intel i386 32 bit processor
             </summary>
         </member>
+        <member name="T:Chase.FFmpeg.Downloader.FFmpegDownloader">
+            <summary>
+            Handles downloading the latest version of ffmpeg
+            </summary>
+        </member>
+        <member name="F:Chase.FFmpeg.Downloader.FFmpegDownloader.Instance">
+            <summary>
+            Singleton pattern for FFmpegDownloader
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.FFmpegDownloader.FFmpegExecutable">
+            <summary>
+            The absolute path to the ffmpeg executable<br />
+            <code>Example: /path/to/ffmpeg.exe</code>
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.FFmpegDownloader.FFprobeExecutable">
+            <summary>
+            The absolute path to the ffprobe executable<br />
+            <code>Example: /path/to/ffprobe.exe</code>
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Downloader.FFmpegDownloader.FFmpegVersion">
+            <summary>
+            The currently installed version of ffmpeg
+            </summary>
+        </member>
         <member name="M:Chase.FFmpeg.Downloader.FFmpegDownloader.GetLatest(System.String)">
             <summary>
             Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...

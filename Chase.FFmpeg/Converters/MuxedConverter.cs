@@ -5,10 +5,22 @@ using System.Text;
 
 namespace Chase.FFmpeg.Converters;
 
+/// <summary>
+/// For converting video and audio streams
+/// </summary>
 public sealed class MuxedConverter
 {
+    /// <summary>
+    /// The input file
+    /// </summary>
     public MediaInfo Info { get; private set; }
-    private StringBuilder _postInputBuilder, _preInputBuilder, _videoFormat;
+    private readonly StringBuilder _postInputBuilder, _preInputBuilder, _videoFormat;
+
+    /// <summary>
+    /// Sets the input file
+    /// </summary>
+    /// <param name="info"></param>
+    /// <returns></returns>
     public static MuxedConverter SetMedia(MediaInfo info)
     {
         return new(info);
@@ -125,11 +137,22 @@ public sealed class MuxedConverter
         return this;
     }
 
+    /// <summary>
+    /// Changes the start position of the converted file
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeStartPosition(string position)
     {
         _preInputBuilder.Append($" -ss {position}");
         return this;
     }
+
+    /// <summary>
+    /// Changes the the duration of the video
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
     public MuxedConverter ChangeVideoDuration(string position)
     {
         _postInputBuilder.Append($" -t {position}");
