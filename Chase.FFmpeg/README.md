@@ -10,12 +10,12 @@ using Chase.FFmpeg;
 
 ## Create media info object
 ```csharp
-MediaInfo info = new MediaInfo("/path/to/media.mkv");
+FFMediaInfo info = new FFMediaInfo("/path/to/media.mkv");
 ```
 
 ## Create Muxed converter
 ```csharp
-MuxedConverter converter = MuxedConverter.SetMedia(info)
+FFMuxedConverter converter = FFMuxedConverter.SetMedia(info)
 ```
 # Muxed converter options
 ## Changes the video codec
@@ -104,7 +104,7 @@ EventHandler<FFProcessUpdateEventArgs> updated = (object sender, FFProcessUpdate
 
 ## Example
 ```csharp
-string argument = MuxedConverter
+string argument = FFMuxedConverter
     .SetMedia(info)
     .ChangeVideoCodec("h264_nvenc")
     .ChangeVideoBitrate("2M")
