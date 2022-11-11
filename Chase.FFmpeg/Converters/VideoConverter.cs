@@ -1,4 +1,4 @@
 ﻿namespace Chase.FFmpeg.Converters;
-public class VideoConverter
+internal class VideoConverter
 {
 }
