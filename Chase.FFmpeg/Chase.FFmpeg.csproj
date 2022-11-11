@@ -4,6 +4,18 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Chase FFMPEG</Title>
+    <Company>Drew Chase</Company>
+    <Description>A ffmpeg tool for .net</Description>
+    <PackageProjectUrl>https://github.com/DcmanProductions/Chase.FFmpeg</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
+    <FileVersion>$(PackageVersion)</FileVersion>
+    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+    <Version>0.0.2</Version>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>./doc.xml</DocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +24,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chase.FFmpeg.Downloader\Chase.FFmpeg.Downloader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
