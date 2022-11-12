@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chase.FFmpeg.Extra</name>
+    </assembly>
+    <members>
+        <member name="T:Chase.FFmpeg.Extra.FFAudioUtility">
+            <summary>
+            Static methods for handling audio files
+            </summary>
+        </member>
+        <member name="F:Chase.FFmpeg.Extra.FFAudioUtility.audio_extension">
+            <summary>
+            Returns an array of all audio file extensions
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFAudioUtility.HasAudioExtension(System.String)">
+            <summary>
+            Checks if file has a extension matching the <seealso cref="F:Chase.FFmpeg.Extra.FFAudioUtility.audio_extension">Audio Extensions</seealso> array
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFAudioUtility.GetFiles(System.String,System.Boolean)">
+            <summary>
+            Gets all files with audio extension in specified directory
+            </summary>
+            <param name="path">The starting path</param>
+            <param name="recursive">If the search should look through all subdirectories</param>
+            <returns></returns>
+        </member>
+        <member name="T:Chase.FFmpeg.Extra.FFImageUtility">
+            <summary>
+            Static methods for handling image files
+            </summary>
+        </member>
+        <member name="F:Chase.FFmpeg.Extra.FFImageUtility.image_extension">
+            <summary>
+            Returns an array of all image file extensions
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFImageUtility.HasImageExtension(System.String)">
+            <summary>
+            Checks if file has a extension matching the <seealso cref="F:Chase.FFmpeg.Extra.FFImageUtility.image_extension">Image Extensions</seealso> array
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFImageUtility.GetFiles(System.String,System.Boolean)">
+            <summary>
+            Gets all files with image extension in specified directory
+            </summary>
+            <param name="path">The starting path</param>
+            <param name="recursive">If the search should look through all subdirectories</param>
+            <returns></returns>
+        </member>
+        <member name="T:Chase.FFmpeg.Extra.FFVideoUtility">
+            <summary>
+            Static methods for handling video files
+            </summary>
+        </member>
+        <member name="F:Chase.FFmpeg.Extra.FFVideoUtility.video_extension">
+            <summary>
+            Returns an array of all video file extensions
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFVideoUtility.HasVideoExtension(System.String)">
+            <summary>
+            Checks if file has a extension matching the <seealso cref="F:Chase.FFmpeg.Extra.FFVideoUtility.video_extension">Video Extensions</seealso> array
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Extra.FFVideoUtility.GetFiles(System.String,System.Boolean)">
+            <summary>
+            Gets all files with video extension in specified directory
+            </summary>
+            <param name="path">The starting path</param>
+            <param name="recursive">If the search should look through all subdirectories</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
