@@ -12,10 +12,11 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>./doc.xml</DocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Updated class names</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
