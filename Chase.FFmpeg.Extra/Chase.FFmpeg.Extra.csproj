@@ -5,7 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>docs.xml</DocumentationFile>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Chase.FFmpeg.Extras</Title>
@@ -16,9 +15,10 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <FileVersion>$(PackageVersion)</FileVersion>
-    <Version>0.0.2</Version>
-    <PackageReleaseNotes>updated repository url
-</PackageReleaseNotes>
+    <Version>0.0.3</Version>
+    <PackageReleaseNotes>
+      updated docs
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

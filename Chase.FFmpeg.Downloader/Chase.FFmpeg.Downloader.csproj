@@ -5,18 +5,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>docs.xml</DocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Chase FFmpeg Downloader</Title>
     <Company>Drew Chase</Company>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <FileVersion>$(PackageVersion)</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Handles downloading ffmpeg</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
-    <PackageReleaseNotes>updated repository url
+    <PackageReleaseNotes>updated docs
 </PackageReleaseNotes>
   </PropertyGroup>
 
