@@ -10,11 +10,6 @@ public class FFSupportedHardwareAccelerationMethods
     /// </summary>
     public static readonly FFSupportedHardwareAccelerationMethods Instance = Instance ??= new();
 
-    /// <summary>
-    /// An array of supported methods
-    /// </summary>
-    public string[] Methods { get; private set; }
-
     private FFSupportedHardwareAccelerationMethods()
     {
         List<string> methods = new();
@@ -31,4 +26,9 @@ public class FFSupportedHardwareAccelerationMethods
         }, null);
         Methods = methods.ToArray();
     }
+
+    /// <summary>
+    /// An array of supported methods
+    /// </summary>
+    public string[] Methods { get; private set; }
 }

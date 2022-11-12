@@ -21,14 +21,39 @@ public sealed class FFmpegDownloader
     public string FFmpegExecutable { get; private set; } = "";
 
     /// <summary>
+    /// The currently installed version of ffmpeg
+    /// </summary>
+    public string FFmpegVersion { get; private set; } = "";
+
+    /// <summary>
     /// The absolute path to the ffprobe executable<br />
     /// <code>Example: /path/to/ffprobe.exe</code>
     /// </summary>
     public string FFprobeExecutable { get; private set; } = "";
     /// <summary>
-    /// The currently installed version of ffmpeg
+    /// Gets the current version or creates a version file if none is found.
     /// </summary>
-    public string FFmpegVersion { get; private set; } = "";
+    /// <returns></returns>
+    public string GetCurrentVersion()
+    {
+        string version_file = Path.Combine(_directory, "version.json");
+        if (!File.Exists(version_file))
+        {
+            CreateVersionFile();
+            return FFUrlParser.Instance.Version;
+        }
+        try
+        {
+            using FileStream fs = new(Path.Combine(_directory, "version.json"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using StreamReader reader = new(fs);
+            return (string)JObject.Parse(reader.ReadToEnd())["version"];
+        }
+        catch
+        {
+            return "";
+        }
+    }
+
     /// <summary>
     /// Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...
     /// </summary>
@@ -78,21 +103,6 @@ public sealed class FFmpegDownloader
     }
 
     /// <summary>
-    /// Downloads the archive file from the remote server.
-    /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    private async Task<string> GetArchive(Uri url)
-    {
-        string archive = Path.Combine(_directory, $"{DateTime.Now.Ticks}.zip");
-        using HttpClient client = new();
-        using FileStream fs = new(archive, FileMode.Create, FileAccess.Write, FileShare.None);
-        using Stream dl_stream = await client.GetStreamAsync(url);
-        await dl_stream.CopyToAsync(fs);
-        return archive;
-    }
-
-    /// <summary>
     /// Unzips archive in-place.
     /// </summary>
     /// <param name="archive"></param>
@@ -109,6 +119,7 @@ public sealed class FFmpegDownloader
         }
         File.Delete(archive);
     }
+
     /// <summary>
     /// Creates the version file with the remote version
     /// </summary>
@@ -123,26 +134,17 @@ public sealed class FFmpegDownloader
     }
 
     /// <summary>
-    /// Gets the current version or creates a version file if none is found.
+    /// Downloads the archive file from the remote server.
     /// </summary>
+    /// <param name="url"></param>
     /// <returns></returns>
-    public string GetCurrentVersion()
+    private async Task<string> GetArchive(Uri url)
     {
-        string version_file = Path.Combine(_directory, "version.json");
-        if (!File.Exists(version_file))
-        {
-            CreateVersionFile();
-            return FFUrlParser.Instance.Version;
-        }
-        try
-        {
-            using FileStream fs = new(Path.Combine(_directory, "version.json"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using StreamReader reader = new(fs);
-            return (string)JObject.Parse(reader.ReadToEnd())["version"];
-        }
-        catch
-        {
-            return "";
-        }
+        string archive = Path.Combine(_directory, $"{DateTime.Now.Ticks}.zip");
+        using HttpClient client = new();
+        using FileStream fs = new(archive, FileMode.Create, FileAccess.Write, FileShare.None);
+        using Stream dl_stream = await client.GetStreamAsync(url);
+        await dl_stream.CopyToAsync(fs);
+        return archive;
     }
 }

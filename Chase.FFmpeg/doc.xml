@@ -52,7 +52,7 @@
         <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)">
             <summary>
             Changes the width and height of the video stream<br />
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)"/>
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)" /> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)" />
             </summary>
             <param name="width"></param>
             <param name="height"></param>
@@ -61,8 +61,8 @@
         <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)">
             <summary>
             Changes the width of the video while maintaining aspect ratio<br />
-            
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)"/>
+
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)" /> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)" />
             </summary>
             <param name="width"></param>
             <returns></returns>
@@ -70,14 +70,14 @@
         <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)">
             <summary>
             Changes the height of the video while maintaining aspect ratio<br />
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)"/>
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)" /> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)" />
             </summary>
             <param name="height"></param>
             <returns></returns>
         </member>
         <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHardwareAccelerationMethod(System.String)">
             <summary>
-            Check <seealso cref="T:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods"/> for list of supported methods.
+            Check <seealso cref="T:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods" /> for list of supported methods.
             </summary>
             <param name="method"></param>
             <returns></returns>

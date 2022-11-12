@@ -9,39 +9,6 @@ namespace Chase.FFmpeg.Info;
 public sealed class FFMediaInfo
 {
     /// <summary>
-    /// The size of the file in bytes
-    /// </summary>
-    public ulong Size { get; private set; }
-    /// <summary>
-    /// The file size in human readable notation
-    /// </summary>
-    public string SizeENG { get; private set; }
-    /// <summary>
-    /// The duration as a timespan
-    /// </summary>
-    public TimeSpan DurationENG { get; private set; }
-    /// <summary>
-    /// The duration in seconds
-    /// </summary>
-    public double Duration { get; private set; }
-    /// <summary>
-    /// The name of the file
-    /// </summary>
-    public string Filename { get; private set; }
-    /// <summary>
-    /// The path to the file
-    /// </summary>
-    public string Path { get; private set; }
-    /// <summary>
-    /// The video stream information
-    /// </summary>
-    public FFVideoStreamInfo VideoStream { get; private set; }
-    /// <summary>
-    /// The audio stream information
-    /// </summary>
-    public FFAudioStreamInfo AudioStream { get; private set; }
-
-    /// <summary>
     /// General media information
     /// </summary>
     /// <param name="file"></param>
@@ -178,4 +145,42 @@ public sealed class FFMediaInfo
 
         SizeENG = CLMath.CLFileMath.AdjustedFileSize(Size);
     }
+
+    /// <summary>
+    /// The audio stream information
+    /// </summary>
+    public FFAudioStreamInfo AudioStream { get; private set; }
+
+    /// <summary>
+    /// The duration in seconds
+    /// </summary>
+    public double Duration { get; private set; }
+
+    /// <summary>
+    /// The duration as a timespan
+    /// </summary>
+    public TimeSpan DurationENG { get; private set; }
+
+    /// <summary>
+    /// The name of the file
+    /// </summary>
+    public string Filename { get; private set; }
+
+    /// <summary>
+    /// The path to the file
+    /// </summary>
+    public string Path { get; private set; }
+
+    /// <summary>
+    /// The size of the file in bytes
+    /// </summary>
+    public ulong Size { get; private set; }
+    /// <summary>
+    /// The file size in human readable notation
+    /// </summary>
+    public string SizeENG { get; private set; }
+    /// <summary>
+    /// The video stream information
+    /// </summary>
+    public FFVideoStreamInfo VideoStream { get; private set; }
 }

@@ -12,9 +12,8 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>./doc.xml</DocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>updated repository url
 </PackageReleaseNotes>

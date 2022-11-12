@@ -10,6 +10,31 @@ internal static class FFOSProvider
 {
 
     /// <summary>
+    /// If the processor is Intel i386 32 bit processor
+    /// </summary>
+    public static bool Is32 => RuntimeInformation.ProcessArchitecture == Architecture.X86;
+
+    /// <summary>
+    /// If the processor is AMD 64 bit
+    /// </summary>
+    public static bool Is64 => RuntimeInformation.ProcessArchitecture == Architecture.X64;
+
+    /// <summary>
+    /// If the processor is ARM based or not
+    /// </summary>
+    public static bool IsARM => IsARM64 || IsARM32;
+
+    /// <summary>
+    /// If the processor is ARM 32 bit or not
+    /// </summary>
+    public static bool IsARM32 => RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
+
+    /// <summary>
+    /// If the processor is ARM 64 bit or not
+    /// </summary>
+    public static bool IsARM64 => RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
+
+    /// <summary>
     /// The ffmpeg friendly name for the systems cpu architecture and Operating System name
     /// </summary>
     public static string Name
@@ -56,26 +81,4 @@ internal static class FFOSProvider
             return name.ToString();
         }
     }
-
-    /// <summary>
-    /// If the processor is ARM based or not
-    /// </summary>
-    public static bool IsARM => IsARM64 || IsARM32;
-    /// <summary>
-    /// If the processor is ARM 64 bit or not
-    /// </summary>
-    public static bool IsARM64 => RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
-    /// <summary>
-    /// If the processor is ARM 32 bit or not
-    /// </summary>
-    public static bool IsARM32 => RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
-    /// <summary>
-    /// If the processor is AMD 64 bit
-    /// </summary>
-    public static bool Is64 => RuntimeInformation.ProcessArchitecture == Architecture.X64;
-    /// <summary>
-    /// If the processor is Intel i386 32 bit processor
-    /// </summary>
-    public static bool Is32 => RuntimeInformation.ProcessArchitecture == Architecture.X86;
-
 }
