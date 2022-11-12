@@ -9,10 +9,15 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Chase FFmpeg Downloader</Title>
     <Company>Drew Chase</Company>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <FileVersion>$(PackageVersion)</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Handles downloading ffmpeg</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
+    <PackageReleaseNotes>updated repository url
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

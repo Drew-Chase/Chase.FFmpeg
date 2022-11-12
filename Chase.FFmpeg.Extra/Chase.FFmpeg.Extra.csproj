@@ -7,6 +7,18 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>docs.xml</DocumentationFile>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Chase.FFmpeg.Extras</Title>
+    <Company>Drew Chase</Company>
+    <Authors>Drew Chase</Authors>
+    <Description>Adds extra functionality to Chase.FFmpeg</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
+    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+    <FileVersion>$(PackageVersion)</FileVersion>
+    <Version>0.0.2</Version>
+    <PackageReleaseNotes>updated repository url
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

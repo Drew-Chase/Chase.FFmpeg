@@ -8,15 +8,16 @@
     <Title>Chase FFMPEG</Title>
     <Company>Drew Chase</Company>
     <Description>A ffmpeg tool for .net</Description>
-    <PackageProjectUrl>https://github.com/DcmanProductions/Chase.FFmpeg</PackageProjectUrl>
+    <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>./doc.xml</DocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Updated class names</PackageReleaseNotes>
+    <PackageReleaseNotes>updated repository url
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
