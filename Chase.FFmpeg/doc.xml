@@ -4,102 +4,133 @@
         <name>Chase.FFmpeg</name>
     </assembly>
     <members>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeVideoCodec(System.String)">
+        <member name="T:Chase.FFmpeg.Converters.FFMuxedConverter">
+            <summary>
+            For converting video and audio streams
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Converters.FFMuxedConverter.Info">
+            <summary>
+            The input file
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.SetMedia(Chase.FFmpeg.Info.FFMediaInfo)">
+            <summary>
+            Sets the input file
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeVideoCodec(System.String)">
             <summary>
             Changes the video codec
             </summary>
             <param name="codec"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeAudioCodec(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeAudioCodec(System.String)">
             <summary>
             Changes the audio codec
             </summary>
             <param name="codec"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeVideoBitrate(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeVideoBitrate(System.String)">
             <summary>
             Changes the video bitrate
             </summary>
             <param name="bitrate"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeAudioBitrate(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeAudioBitrate(System.String)">
             <summary>
             Changes the audio bitrate
             </summary>
             <param name="bitrate"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeResolution(System.Int32,System.Int32)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)">
             <summary>
             Changes the width and height of the video stream<br />
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeWidth(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeHeight(System.Int32)"/>
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)"/>
             </summary>
             <param name="width"></param>
             <param name="height"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeWidth(System.Int32)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)">
             <summary>
             Changes the width of the video while maintaining aspect ratio<br />
             
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeHeight(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeResolution(System.Int32,System.Int32)"/>
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)"/>
             </summary>
             <param name="width"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeHeight(System.Int32)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHeight(System.Int32)">
             <summary>
             Changes the height of the video while maintaining aspect ratio<br />
-            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeResolution(System.Int32,System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeWidth(System.Int32)"/>
+            This is <b>NOT</b> compatable with <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeResolution(System.Int32,System.Int32)"/> or <seealso cref="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeWidth(System.Int32)"/>
             </summary>
             <param name="height"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangeHardwareAccelerationMethod(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeHardwareAccelerationMethod(System.String)">
             <summary>
-            Check <seealso cref="T:Chase.FFmpeg.Info.SupportedHardwareAccelerationMethods"/> for list of supported methods.
+            Check <seealso cref="T:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods"/> for list of supported methods.
             </summary>
             <param name="method"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.OverwriteOriginal">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.OverwriteOriginal">
             <summary>
             Overwrites oringal file
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.ChangePixelFormat(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangePixelFormat(System.String)">
             <summary>
             Changes the pixel format of the video
             </summary>
             <param name="format"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.AddCustomPostInputOption(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeStartPosition(System.String)">
+            <summary>
+            Changes the start position of the converted file
+            </summary>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.ChangeVideoDuration(System.String)">
+            <summary>
+            Changes the the duration of the video
+            </summary>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.AddCustomPostInputOption(System.String)">
             <summary>
             Adds an argument after the input option
             </summary>
             <param name="option"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.AddCustomPreInputOption(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.AddCustomPreInputOption(System.String)">
             <summary>
             Adds an argument before the input option
             </summary>
             <param name="option"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.AddCustomVideoFormatOption(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.AddCustomVideoFormatOption(System.String)">
             <summary>
             Adds a video format option
             </summary>
             <param name="option"></param>
             <returns></returns>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.Convert(System.String,System.Diagnostics.DataReceivedEventHandler,System.EventHandler,System.EventHandler{Chase.FFmpeg.Events.FFProcessUpdateEventArgs})">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.Convert(System.String,System.Diagnostics.DataReceivedEventHandler,System.EventHandler,System.EventHandler{Chase.FFmpeg.Events.FFProcessUpdateEventArgs})">
             <summary>
             Builds the ffmpeg argument and starts the convertion proess
             </summary>
@@ -108,12 +139,17 @@
             <param name="exited"></param>
             <param name="updated"></param>
         </member>
-        <member name="M:Chase.FFmpeg.Converters.MuxedConverter.Build(System.String)">
+        <member name="M:Chase.FFmpeg.Converters.FFMuxedConverter.Build(System.String)">
             <summary>
             Builds and returns the ffmpeg argument
             </summary>
             <param name="output_file"></param>
             <returns></returns>
+        </member>
+        <member name="T:Chase.FFmpeg.Events.FFProcessUpdateEventArgs">
+            <summary>
+            Runs when ffmpeg changes conversion status
+            </summary>
         </member>
         <member name="P:Chase.FFmpeg.Events.FFProcessUpdateEventArgs.Percentage">
             <summary>
@@ -135,13 +171,20 @@
             The bitrate that the video is being processed at
             </summary>
         </member>
-        <member name="M:Chase.FFmpeg.FFProcessHandler.ExecuteFFmpeg(System.String,Chase.FFmpeg.Info.MediaInfo,System.Diagnostics.DataReceivedEventHandler,System.EventHandler,System.EventHandler{Chase.FFmpeg.Events.FFProcessUpdateEventArgs})">
+        <member name="T:Chase.FFmpeg.FFProcessHandler">
+            <summary>
+            Adds functions to run ffmpeg/ffprobe
+            </summary>
+        </member>
+        <member name="M:Chase.FFmpeg.FFProcessHandler.ExecuteFFmpeg(System.String,Chase.FFmpeg.Info.FFMediaInfo,System.Diagnostics.DataReceivedEventHandler,System.EventHandler,System.EventHandler{Chase.FFmpeg.Events.FFProcessUpdateEventArgs})">
             <summary>
             Executes a command to the ffmpeg executable
             </summary>
             <param name="arguments">The ffmpeg arguments</param>
+            <param name="info"></param>
             <param name="data_handler">Executes when ffmpeg outputs a line to the console</param>
             <param name="exited">Executes when ffmpeg process stops running</param>
+            <param name="updated"></param>
         </member>
         <member name="M:Chase.FFmpeg.FFProcessHandler.ExecuteFFprobe(System.String,System.Diagnostics.DataReceivedEventHandler,System.EventHandler)">
             <summary>
@@ -151,139 +194,154 @@
             <param name="data_handler">Executes when ffprobe outputs a line to the console</param>
             <param name="exited">Executes when ffprobe process stops running</param>
         </member>
-        <member name="T:Chase.FFmpeg.Info.AudioStreamInfo">
+        <member name="T:Chase.FFmpeg.Info.FFAudioStreamInfo">
             <summary>
             Stores information about the audio stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.Codec">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.Codec">
             <summary>
             The codec that the audio stream was encoded with
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.SampleRate">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.SampleRate">
             <summary>
             The sample rate of the audio stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.SampleFormat">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.SampleFormat">
             <summary>
             The sample format of the audio stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.ChannelLayout">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.ChannelLayout">
             <summary>
             The channel layout of the audio stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.Size">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.Size">
             <summary>
             The size in bytes of the audio stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.AudioStreamInfo.Channels">
+        <member name="P:Chase.FFmpeg.Info.FFAudioStreamInfo.Channels">
             <summary>
             The number of channels in the audio stream
             </summary>
         </member>
-        <member name="T:Chase.FFmpeg.Info.MediaInfo">
+        <member name="T:Chase.FFmpeg.Info.FFMediaInfo">
             <summary>
             Class for compiling and handling general media information
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.Size">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.Size">
             <summary>
             The size of the file in bytes
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.SizeENG">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.SizeENG">
             <summary>
             The file size in human readable notation
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.DurationENG">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.DurationENG">
             <summary>
             The duration as a timespan
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.Duration">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.Duration">
             <summary>
             The duration in seconds
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.Filename">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.Filename">
             <summary>
             The name of the file
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.Path">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.Path">
             <summary>
             The path to the file
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.VideoStream">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.VideoStream">
             <summary>
             The video stream information
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.MediaInfo.AudioStream">
+        <member name="P:Chase.FFmpeg.Info.FFMediaInfo.AudioStream">
             <summary>
             The audio stream information
             </summary>
         </member>
-        <member name="M:Chase.FFmpeg.Info.MediaInfo.#ctor(System.String,System.Boolean)">
+        <member name="M:Chase.FFmpeg.Info.FFMediaInfo.#ctor(System.String,System.Boolean)">
             <summary>
             General media information
             </summary>
             <param name="file"></param>
             <param name="useQuickMath">If the percentage should be calculated by the duration * framerate or by getting the exact frame count from ffprobe</param>
         </member>
-        <member name="T:Chase.FFmpeg.Info.VideoStreamInfo">
+        <member name="T:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods">
+            <summary>
+            Adds functions getting Supported Hardware Acceleration Methods
+            </summary>
+        </member>
+        <member name="F:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods.Instance">
+            <summary>
+            Singleton pattern for FFSupportedHardwareAccelerationMethods
+            </summary>
+        </member>
+        <member name="P:Chase.FFmpeg.Info.FFSupportedHardwareAccelerationMethods.Methods">
+            <summary>
+            An array of supported methods
+            </summary>
+        </member>
+        <member name="T:Chase.FFmpeg.Info.FFVideoStreamInfo">
             <summary>
             Stores information about the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.Frames">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.Frames">
             <summary>
             The number of frames in a video
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.BitRate">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.BitRate">
             <summary>
             The bit rate of the video in bytes
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.BitRateENG">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.BitRateENG">
             <summary>
             The bit rate of the video in human readable notation
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.Width">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.Width">
             <summary>
             The width of the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.Height">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.Height">
             <summary>
             The height of the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.PixelFormat">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.PixelFormat">
             <summary>
             The pixel format of the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.Framerate">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.Framerate">
             <summary>
             The average framerate of the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.AspectRatio">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.AspectRatio">
             <summary>
             The aspect ratio of the video stream
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Info.VideoStreamInfo.Codec">
+        <member name="P:Chase.FFmpeg.Info.FFVideoStreamInfo.Codec">
             <summary>
             The name of the codec used to encode the video stream
             </summary>

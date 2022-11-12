@@ -4,37 +4,37 @@
         <name>Chase.FFmpeg.Downloader</name>
     </assembly>
     <members>
-        <member name="T:Chase.FFmpeg.Downloader.Environment.OS_Provider">
+        <member name="T:Chase.FFmpeg.Downloader.Environment.FFOSProvider">
             <summary>
             Gives utility variables for the current operating system
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Name">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.Name">
             <summary>
             The ffmpeg friendly name for the systems cpu architecture and Operating System name
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.IsARM">
             <summary>
             If the processor is ARM based or not
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM64">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.IsARM64">
             <summary>
             If the processor is ARM 64 bit or not
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.IsARM32">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.IsARM32">
             <summary>
             If the processor is ARM 32 bit or not
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Is64">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.Is64">
             <summary>
             If the processor is AMD 64 bit
             </summary>
         </member>
-        <member name="P:Chase.FFmpeg.Downloader.Environment.OS_Provider.Is32">
+        <member name="P:Chase.FFmpeg.Downloader.Environment.FFOSProvider.Is32">
             <summary>
             If the processor is Intel i386 32 bit processor
             </summary>
