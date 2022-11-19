@@ -19,9 +19,8 @@ public static class FFProcessHandler
     /// <param name="arguments">The ffmpeg arguments</param>
     /// <param name="info"></param>
     /// <param name="data_handler">Executes when ffmpeg outputs a line to the console</param>
-    /// <param name="exited">Executes when ffmpeg process stops running</param>
     /// <param name="updated"></param>
-    public static void ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null, EventHandler? exited = null, EventHandler<FFProcessUpdateEventArgs>? updated = null)
+    public static Process ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null,  EventHandler<FFProcessUpdateEventArgs>? updated = null)
     {
         float Percentage = 0f;
         uint FramesProcessed = 0;
@@ -44,9 +43,6 @@ public static class FFProcessHandler
             process.ErrorDataReceived += data_handler;
             process.OutputDataReceived += data_handler;
         }
-        if (exited != null)
-            process.Exited += exited;
-
 
         if (info != null)
         {
@@ -107,7 +103,8 @@ public static class FFProcessHandler
         process.BeginErrorReadLine();
         process.BeginOutputReadLine();
         process.WaitForExit();
-        process.Close();
+
+        return process;
     }
 
     /// <summary>

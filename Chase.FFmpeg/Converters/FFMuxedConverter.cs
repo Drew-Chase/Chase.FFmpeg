@@ -204,9 +204,8 @@ public sealed class FFMuxedConverter
     /// </summary>
     /// <param name="output_file"></param>
     /// <param name="data_handler"></param>
-    /// <param name="exited"></param>
     /// <param name="updated"></param>
-    public void Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler? exited, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, exited, updated);
+    public Process Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, updated);
 
     /// <summary>
     /// Overwrites oringal file
@@ -218,4 +217,3 @@ public sealed class FFMuxedConverter
         return this;
     }
 }
-// FFMuxedConverter.SetMedia().ChangeFramerate(15).ChangeResolution(800,600).ChangeCodec("h264_nvenc")
