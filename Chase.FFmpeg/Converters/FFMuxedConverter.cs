@@ -6,17 +6,31 @@ using System.Text;
 namespace Chase.FFmpeg.Converters;
 
 /// <summary>
+/// Stream types for 
+/// </summary>
+public enum StreamType
+{
+    Video,
+    Audio,
+    Subtitle
+}
+
+/// <summary>
 /// For converting video and audio streams
 /// </summary>
 public sealed class FFMuxedConverter
 {
-    private readonly StringBuilder _postInputBuilder, _preInputBuilder, _videoFormat;
+    private readonly StringBuilder _postInputBuilder, _preInputBuilder, _videoFormat, _inputsBuilder;
 
     private FFMuxedConverter(FFMediaInfo info)
     {
         _preInputBuilder = new StringBuilder();
         _postInputBuilder = new StringBuilder();
         _videoFormat = new StringBuilder();
+        _inputsBuilder = new StringBuilder();
+
+
+        _inputsBuilder.AppendLine($" -i \"{info.Path}\" ");
 
         Info = info;
     }
@@ -37,6 +51,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Adds an argument after the input option
+    /// <br /><br />FFMpeg argument: <b>{option}</b>
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
@@ -48,6 +63,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Adds an argument before the input option
+    /// <br /><br />FFMpeg argument: <b>{option}</b>
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
@@ -59,6 +75,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Adds a video format option
+    /// <br /><br />FFMpeg argument: <b>{option}</b>
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
@@ -73,10 +90,11 @@ public sealed class FFMuxedConverter
     /// </summary>
     /// <param name="output_file"></param>
     /// <returns></returns>
-    public string Build(string output_file) => $"{_preInputBuilder.ToString().Trim()} -i \"{Info.Path}\" {_postInputBuilder} {(!string.IsNullOrWhiteSpace(_videoFormat.ToString()) ? $"-vf \"{_videoFormat.ToString().Trim()}\"" : "")} \"{output_file.Trim()}\"".Replace("  ", " ").Trim();
+    public string Build(string output_file) => $"{_preInputBuilder.ToString().Trim()} {_inputsBuilder.ToString().Trim()} {_postInputBuilder} {(!string.IsNullOrWhiteSpace(_videoFormat.ToString()) ? $"-vf \"{_videoFormat.ToString().Trim()}\"" : "")} \"{output_file.Trim()}\"".Replace("  ", " ").Trim();
 
     /// <summary>
     /// Changes the audio bitrate
+    /// <br /><br />FFMpeg argument: <b>-b:a {bitrate}</b>
     /// </summary>
     /// <param name="bitrate"></param>
     /// <returns></returns>
@@ -88,6 +106,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Changes the audio codec
+    /// <br /><br />FFMpeg argument: <b>-c:a {codec}</b>
     /// </summary>
     /// <param name="codec"></param>
     /// <returns></returns>
@@ -99,6 +118,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Check <seealso cref="FFSupportedHardwareAccelerationMethods"/> for list of supported methods.
+    /// <br /><br />FFMpeg argument: <b>-hwaccel {method}</b>
     /// </summary>
     /// <param name="method"></param>
     /// <returns></returns>
@@ -111,6 +131,7 @@ public sealed class FFMuxedConverter
     /// <summary>
     /// Changes the height of the video while maintaining aspect ratio<br />
     /// This is <b>NOT</b> compatable with <seealso cref="ChangeResolution(int, int)"/> or <seealso cref="ChangeWidth(int)"/>
+    /// <br /><br />FFMpeg argument: <b>scale=-1:{height}</b>
     /// </summary>
     /// <param name="height"></param>
     /// <returns></returns>
@@ -122,6 +143,7 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Changes the pixel format of the video
+    /// <br /><br />FFMpeg argument: <b>-pix_fmt {format}</b>
     /// </summary>
     /// <param name="format"></param>
     /// <returns></returns>
@@ -134,6 +156,7 @@ public sealed class FFMuxedConverter
     /// <summary>
     /// Changes the width and height of the video stream<br />
     /// This is <b>NOT</b> compatable with <seealso cref="ChangeWidth(int)"/> or <seealso cref="ChangeHeight(int)"/>
+    /// <br /><br />FFMpeg argument: <b>-vf "scale={width}:{height}"</b>
     /// </summary>
     /// <param name="width"></param>
     /// <param name="height"></param>
@@ -146,28 +169,31 @@ public sealed class FFMuxedConverter
 
     /// <summary>
     /// Changes the start position of the converted file
+    /// <br /><br />FFMpeg argument: <b>-ss {position}</b>
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
     public FFMuxedConverter ChangeStartPosition(string position)
     {
-        _preInputBuilder.Append($" -ss {position}");
+        _preInputBuilder.Append($" -ss {position} ");
         return this;
     }
 
     /// <summary>
     /// Changes the video bitrate
+    /// <br /><br />FFMpeg argument: <b>-b:v {bitrate}</b>
     /// </summary>
     /// <param name="bitrate"></param>
     /// <returns></returns>
     public FFMuxedConverter ChangeVideoBitrate(string bitrate)
     {
-        _postInputBuilder.Append($" -b:v {bitrate}");
+        _postInputBuilder.Append($" -b:v {bitrate} ");
         return this;
     }
 
     /// <summary>
     /// Changes the video codec
+    /// <br /><br />FFMpeg argument: <b>-c:v {codec}</b>
     /// </summary>
     /// <param name="codec"></param>
     /// <returns></returns>
@@ -178,12 +204,13 @@ public sealed class FFMuxedConverter
     }
     /// <summary>
     /// Changes the the duration of the video
+    /// <br /><br />FFMpeg argument: <b>-t {position}</b>
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
     public FFMuxedConverter ChangeVideoDuration(string position)
     {
-        _postInputBuilder.Append($" -t {position}");
+        _postInputBuilder.Append($" -t {position} ");
         return this;
     }
 
@@ -191,6 +218,7 @@ public sealed class FFMuxedConverter
     /// Changes the width of the video while maintaining aspect ratio<br />
     /// 
     /// This is <b>NOT</b> compatable with <seealso cref="ChangeHeight(int)"/> or <seealso cref="ChangeResolution(int, int)"/>
+    /// <br /><br />FFMpeg argument: <b>-vf "scale={width}:-1"</b>
     /// </summary>
     /// <param name="width"></param>
     /// <returns></returns>
@@ -208,7 +236,8 @@ public sealed class FFMuxedConverter
     public Process Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, updated);
 
     /// <summary>
-    /// Overwrites oringal file
+    /// Overwrites oringal file.
+    /// <br /><br />FFMpeg argument: <b>-y</b>
     /// </summary>
     /// <returns></returns>
     public FFMuxedConverter OverwriteOriginal()
@@ -216,4 +245,45 @@ public sealed class FFMuxedConverter
         _preInputBuilder.Append(" -y ");
         return this;
     }
+
+    /// <summary>
+    /// Merges video and audio streams to one file
+    /// <br /><br />FFMpeg argument: <b>-i "{video}" -i "{audio}"</b>
+    /// </summary>
+    /// <param name="video"></param>
+    /// <param name="audio"></param>
+    /// <returns></returns>
+    public FFMuxedConverter MuxStreams(string video, string audio)
+    {
+        _inputsBuilder.Clear();
+        _inputsBuilder.AppendLine($" -i \"{video}\" -i \"{audio}\" ");
+        return this;
+    }
+
+    /// <summary>
+    /// Selects the stream to output.
+    /// <br /><br />FFMpeg argument: <b>-map {type}:{index}"</b>
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public FFMuxedConverter SelectStream(StreamType type, int index)
+    {
+        _postInputBuilder.Append(" -map ");
+        switch (type)
+        {
+            case StreamType.Video:
+                _postInputBuilder.Append("v:");
+                break;
+            case StreamType.Audio:
+                _postInputBuilder.Append("a:");
+                break;
+            case StreamType.Subtitle:
+                _postInputBuilder.Append("s:");
+                break;
+        }
+        _postInputBuilder.Append($"{index} ");
+        return this;
+    }
+
 }
