@@ -15,7 +15,15 @@ public static class FFImageUtility
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
     /// <returns></returns>
-    public static IReadOnlyCollection<string> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasImageExtension(item));
+    public static ICollection<string> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasImageExtension(item));
+
+    /// <summary>
+    /// Gets all files asynchronous with image extension in specified directory
+    /// </summary>
+    /// <param name="path">The starting path</param>
+    /// <param name="recursive">If the search should look through all subdirectories</param>
+    /// <returns></returns>
+    public static ICollection<string> GetFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetFilesAsync(path, recursive, item => HasImageExtension(item));
 
     /// <summary>
     /// Checks if file has a extension matching the <seealso cref="image_extension">Image Extensions</seealso> array
