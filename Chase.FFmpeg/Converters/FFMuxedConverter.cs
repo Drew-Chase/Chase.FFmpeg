@@ -236,17 +236,6 @@ public sealed class FFMuxedConverter
     public Process Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, updated);
 
     /// <summary>
-    /// Overwrites oringal file.
-    /// <br /><br />FFMpeg argument: <b>-y</b>
-    /// </summary>
-    /// <returns></returns>
-    public FFMuxedConverter OverwriteOriginal()
-    {
-        _preInputBuilder.Append(" -y ");
-        return this;
-    }
-
-    /// <summary>
     /// Merges video and audio streams to one file
     /// <br /><br />FFMpeg argument: <b>-i "{video}" -i "{audio}"</b>
     /// </summary>
@@ -260,6 +249,16 @@ public sealed class FFMuxedConverter
         return this;
     }
 
+    /// <summary>
+    /// Overwrites oringal file.
+    /// <br /><br />FFMpeg argument: <b>-y</b>
+    /// </summary>
+    /// <returns></returns>
+    public FFMuxedConverter OverwriteOriginal()
+    {
+        _preInputBuilder.Append(" -y ");
+        return this;
+    }
     /// <summary>
     /// Selects the stream to output.
     /// <br /><br />FFMpeg argument: <b>-map {type}:{index}"</b>
