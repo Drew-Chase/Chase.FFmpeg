@@ -1,12 +1,14 @@
 ﻿
+using Chase.FFmpeg.Info;
+
 namespace Chase.FFmpeg.Extra;
 
 internal static class FFDirectoryUtility
 {
 
-    public static ICollection<string> GetFilesAsync(string path, bool recursive, Func<string, bool> comparison)
+    public static ICollection<FFMediaInfo> GetFilesAsync(string path, bool recursive, Func<string, bool> comparison)
     {
-        List<string> files = new();
+        List<FFMediaInfo> files = new();
 
         Parallel.ForEach(Directory.GetFileSystemEntries(path), file =>
         {
@@ -23,7 +25,7 @@ internal static class FFDirectoryUtility
                 {
                     if (comparison.Invoke(file))
                     {
-                        files.Add(file);
+                        files.Add(new(file));
                     }
                 }
             }
@@ -34,9 +36,9 @@ internal static class FFDirectoryUtility
         return files;
     }
 
-    public static ICollection<string> GetFiles(string path, bool recursive, Func<string, bool> comparison)
+    public static ICollection<FFMediaInfo> GetFiles(string path, bool recursive, Func<string, bool> comparison)
     {
-        List<string> files = new();
+        List<FFMediaInfo> files = new();
         foreach (string file in Directory.GetFileSystemEntries(path))
         {
             try
@@ -52,7 +54,7 @@ internal static class FFDirectoryUtility
                 {
                     if (comparison.Invoke(file))
                     {
-                        files.Add(file);
+                        files.Add(new(file));
                     }
                 }
             }
