@@ -12,11 +12,11 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.5</Version>
+    <Version>0.0.8</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      updated docs
+      Added ability to mux multiple streams and select individual streams. Added better documentation.
     </PackageReleaseNotes>
   </PropertyGroup>
 

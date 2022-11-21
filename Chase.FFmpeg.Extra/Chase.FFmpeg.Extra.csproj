@@ -15,11 +15,15 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <FileVersion>$(PackageVersion)</FileVersion>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <PackageReleaseNotes>
-      updated docs
+      Added async and sync methods to get files.
     </PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chase.FFmpeg\Chase.FFmpeg.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="readme.md">
