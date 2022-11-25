@@ -18,7 +18,7 @@ public sealed class FFmpegDownloader
     /// The absolute path to the ffmpeg executable<br />
     /// <code>Example: /path/to/ffmpeg.exe</code>
     /// </summary>
-    public string FFmpegExecutable { get; private set; } = "";
+    public string FFmpegExecutable { get; private set; } 
 
     /// <summary>
     /// The currently installed version of ffmpeg
@@ -29,7 +29,7 @@ public sealed class FFmpegDownloader
     /// The absolute path to the ffprobe executable<br />
     /// <code>Example: /path/to/ffprobe.exe</code>
     /// </summary>
-    public string FFprobeExecutable { get; private set; } = "";
+    public string FFprobeExecutable { get; private set; }
     /// <summary>
     /// Gets the current version or creates a version file if none is found.
     /// </summary>
