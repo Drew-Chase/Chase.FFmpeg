@@ -17,7 +17,7 @@ public static class FFAudioUtility
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
     /// <returns></returns>
-    public static ICollection<FFMediaInfo> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasAudioExtension(item));
+    public static ICollection<FFMediaInfo> GetMediaFiles(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFiles(path, recursive, item => HasAudioExtension(item));
 
     /// <summary>
     /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
@@ -25,7 +25,22 @@ public static class FFAudioUtility
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
     /// <returns></returns>
-    public static ICollection<FFMediaInfo> GetFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetFilesAsync(path, recursive, item => HasAudioExtension(item));
+    public static ICollection<FFMediaInfo> GetMediaFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFilesAsync(path, recursive, item => HasAudioExtension(item));
+    /// <summary>
+    /// Gets all files with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
+    /// </summary>
+    /// <param name="path">The starting path</param>
+    /// <param name="recursive">If the search should look through all subdirectories</param>
+    /// <returns></returns>
+    public static ICollection<string> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasAudioExtension(item));
+
+    /// <summary>
+    /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
+    /// </summary>
+    /// <param name="path">The starting path</param>
+    /// <param name="recursive">If the search should look through all subdirectories</param>
+    /// <returns></returns>
+    public static ICollection<string> GetFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetFilesAsync(path, recursive, item => HasAudioExtension(item));
 
     /// <summary>
     /// Checks if file has a extension matching the <seealso cref="audio_extension">Audio Extensions</seealso> array

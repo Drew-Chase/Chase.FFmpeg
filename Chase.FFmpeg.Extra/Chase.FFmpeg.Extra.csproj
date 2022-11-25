@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,9 +15,9 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <FileVersion>$(PackageVersion)</FileVersion>
-    <Version>0.0.4</Version>
+    <Version>0.0.6</Version>
     <PackageReleaseNotes>
-      Added async and sync methods to get files.
+      Separated get media files from get files string array.
     </PackageReleaseNotes>
   </PropertyGroup>
 
