@@ -173,7 +173,7 @@ public sealed class FFMuxedConverter
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
-    public FFMuxedConverter ChangeStartPosition(string position)
+    public FFMuxedConverter ChangeStartPosition(TimeSpan position)
     {
         _preInputBuilder.Append($" -ss {position} ");
         return this;
@@ -208,7 +208,7 @@ public sealed class FFMuxedConverter
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
-    public FFMuxedConverter ChangeVideoDuration(string position)
+    public FFMuxedConverter ChangeVideoDuration(TimeSpan position)
     {
         _postInputBuilder.Append($" -t {position} ");
         return this;
@@ -233,7 +233,8 @@ public sealed class FFMuxedConverter
     /// <param name="output_file"></param>
     /// <param name="data_handler"></param>
     /// <param name="updated"></param>
-    public Process Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler<FFProcessUpdateEventArgs>? updated) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, updated);
+    /// <param name="auto_start">If the program should automatically start and wait for exit!</param>
+    public Process Convert(string output_file, DataReceivedEventHandler? data_handler, EventHandler<FFProcessUpdateEventArgs>? updated, bool auto_start = true) => FFProcessHandler.ExecuteFFmpeg(Build(output_file), Info, data_handler, updated, auto_start);
 
     /// <summary>
     /// Merges video and audio streams to one file
