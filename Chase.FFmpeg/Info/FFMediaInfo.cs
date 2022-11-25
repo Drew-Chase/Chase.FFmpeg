@@ -68,7 +68,7 @@ public sealed class FFMediaInfo
                     int[] parts = Array.ConvertAll(sfps.Split('/', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries), i => Convert.ToInt32(i));
                     if (parts.Length == 2 && parts[0] != 0 && parts[1] != 0)
                     {
-                        frameRate = parts[0] / parts[1];
+                        frameRate = (double)parts[0] / parts[1];
                     }
 
                 }
