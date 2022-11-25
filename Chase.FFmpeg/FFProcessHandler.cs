@@ -20,7 +20,7 @@ public static class FFProcessHandler
     /// <param name="info"></param>
     /// <param name="data_handler">Executes when ffmpeg outputs a line to the console</param>
     /// <param name="updated"></param>
-    public static Process ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null,  EventHandler<FFProcessUpdateEventArgs>? updated = null)
+    public static Process ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null, EventHandler<FFProcessUpdateEventArgs>? updated = null)
     {
         float Percentage = 0f;
         uint FramesProcessed = 0;
@@ -87,7 +87,7 @@ public static class FFProcessHandler
                             catch { }
                         }
 
-                        Percentage = ((float)FramesProcessed / info.VideoStream.Frames) * 100;
+                        Percentage = (float)(FramesProcessed / (info.Streams.First(i => i.CodecType.Equals("video", StringComparison.OrdinalIgnoreCase)).FrameRate ?? 1));
                         updated?.Invoke(null, new()
                         {
                             Speed = Speed,
@@ -115,25 +115,38 @@ public static class FFProcessHandler
     /// <param name="exited">Executes when ffprobe process stops running</param>
     public static void ExecuteFFprobe(string arguments, DataReceivedEventHandler? data_handler, EventHandler? exited)
     {
-        Process process = new()
+        try
         {
-            StartInfo = new()
-            {
-                FileName = FFmpegDownloader.Instance.FFprobeExecutable,
-                Arguments = arguments,
-                CreateNoWindow = true,
-                RedirectStandardOutput = true,
-            },
-            EnableRaisingEvents = true,
-        };
 
-        if (data_handler != null)
-            process.OutputDataReceived += data_handler;
-        if (exited != null)
-            process.Exited += exited;
-        process.Start();
-        process.BeginOutputReadLine();
-        process.WaitForExit();
-        process.Close();
+            Process process = new()
+            {
+                StartInfo = new()
+                {
+                    FileName = FFmpegDownloader.Instance.FFprobeExecutable,
+                    Arguments = arguments,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                },
+                EnableRaisingEvents = true,
+            };
+
+            if (data_handler != null)
+            {
+                process.OutputDataReceived += data_handler;
+                process.ErrorDataReceived += data_handler;
+            }
+            if (exited != null)
+                process.Exited += exited;
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            process.WaitForExit();
+            process.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 }
