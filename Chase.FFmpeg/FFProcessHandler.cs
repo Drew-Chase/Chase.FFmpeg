@@ -20,7 +20,8 @@ public static class FFProcessHandler
     /// <param name="info"></param>
     /// <param name="data_handler">Executes when ffmpeg outputs a line to the console</param>
     /// <param name="updated"></param>
-    public static Process ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null, EventHandler<FFProcessUpdateEventArgs>? updated = null)
+    /// <param name="auto_start">If the program should automatically start and wait for exit!</param>
+    public static Process ExecuteFFmpeg(string arguments, FFMediaInfo? info = null, DataReceivedEventHandler? data_handler = null, EventHandler<FFProcessUpdateEventArgs>? updated = null, bool auto_start = true)
     {
         float Percentage = 0f;
         uint FramesProcessed = 0;
@@ -86,8 +87,7 @@ public static class FFProcessHandler
                             }
                             catch { }
                         }
-
-                        Percentage = (float)(FramesProcessed / (info.Streams.First(i => i.CodecType.Equals("video", StringComparison.OrdinalIgnoreCase)).FrameRate ?? 1));
+                        Percentage = (float)(FramesProcessed / (float)info.Streams.First(i => i.CodecType.Equals("video", StringComparison.OrdinalIgnoreCase)).Frames);
                         updated?.Invoke(null, new()
                         {
                             Speed = Speed,
@@ -99,10 +99,14 @@ public static class FFProcessHandler
                 }
             };
         }
-        process.Start();
-        process.BeginErrorReadLine();
-        process.BeginOutputReadLine();
-        process.WaitForExit();
+        if (auto_start)
+        {
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
+            process.Close();
+        }
 
         return process;
     }
