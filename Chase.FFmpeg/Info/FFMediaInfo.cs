@@ -84,6 +84,16 @@ public sealed class FFMediaInfo
                     duration = GetItem<TimeSpan>("DURATION", tags);
                 }
 
+                if (duration == TimeSpan.Zero)
+                {
+                    duration = Duration;
+                }
+
+                if (frames == 0 && frameRate != 0 && duration != null)
+                {
+                    frames = (long)(frameRate * duration.Value.TotalSeconds);
+                }
+
                 temp_streams.Add(new(index, codecName, codecLongName, codecType, profile, width, height, aspectRatio, pixelFormat, level, colorRange, frameRate, frames, bPS, duration));
             }
             Streams = temp_streams.ToArray();
