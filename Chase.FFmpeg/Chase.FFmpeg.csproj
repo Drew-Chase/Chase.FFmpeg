@@ -12,11 +12,11 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.8</Version>
+    <Version>0.0.9</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      Added ability to mux multiple streams and select individual streams. Added better documentation.
+      Removed Audio and Video Streams, Added stream array. FFProcessHandler now has the option to auto start or not.  Fixed error with percentage being infinite.
     </PackageReleaseNotes>
   </PropertyGroup>
 
