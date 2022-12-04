@@ -12,11 +12,11 @@
     <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
     <FileVersion>$(PackageVersion)</FileVersion>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.0.9</Version>
+    <Version>0.1.0</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      Removed Audio and Video Streams, Added stream array. FFProcessHandler now has the option to auto start or not.  Fixed error with percentage being infinite.
+      Added check for if duration or frames are not present in the stream information
     </PackageReleaseNotes>
   </PropertyGroup>
 
