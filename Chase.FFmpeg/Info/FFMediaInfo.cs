@@ -1,4 +1,11 @@
-﻿using Chase.FFmpeg.Exceptions;
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
+using Chase.FFmpeg.Exceptions;
 using Newtonsoft.Json.Linq;
 using System.Text;
 
@@ -10,11 +17,44 @@ namespace Chase.FFmpeg.Info;
 public sealed class FFMediaInfo
 {
     /// <summary>
+    /// The duration as a timespan
+    /// </summary>
+    public TimeSpan Duration { get; private set; }
+
+    /// <summary>
+    /// The name of the file
+    /// </summary>
+    public string Filename { get; private set; }
+
+    /// <summary>
+    /// The path to the file
+    /// </summary>
+    public string Path { get; private set; }
+
+    /// <summary>
+    /// The size of the file in bytes
+    /// </summary>
+    public ulong Size { get; private set; }
+
+    /// <summary>
+    /// The overall birate
+    /// </summary>
+    public ulong BitRate { get; private set; }
+
+    /// <summary>
+    /// A array of all streams
+    /// </summary>
+    public FFMediaStream[]? Streams { get; private set; }
+
+    /// <summary>
     /// General media information
     /// </summary>
     /// <param name="file"></param>
-    /// <param name="useQuickMath">If the percentage should be calculated by the duration * framerate or by getting the exact frame count from ffprobe.  This can have major performance impacts!</param>
-    /// <exception cref="NotMediaFileException" />
+    /// <param name="useQuickMath">
+    /// If the percentage should be calculated by the duration * framerate or by getting the exact
+    /// frame count from ffprobe. This can have major performance impacts!
+    /// </param>
+    /// <exception cref="NotMediaFileException"/>
     public FFMediaInfo(string file, bool useQuickMath = true)
     {
         FileInfo info = new(file);
@@ -70,7 +110,6 @@ public sealed class FFMediaInfo
                     {
                         frameRate = (double)parts[0] / parts[1];
                     }
-
                 }
 
                 long? frames = 0;
@@ -98,37 +137,7 @@ public sealed class FFMediaInfo
             }
             Streams = temp_streams.ToArray();
         }
-
     }
-
-    /// <summary>
-    /// The duration as a timespan
-    /// </summary>
-    public TimeSpan Duration { get; private set; }
-
-    /// <summary>
-    /// The name of the file
-    /// </summary>
-    public string Filename { get; private set; }
-
-    /// <summary>
-    /// The path to the file
-    /// </summary>
-    public string Path { get; private set; }
-
-    /// <summary>
-    /// The size of the file in bytes
-    /// </summary>
-    public ulong Size { get; private set; }
-    /// <summary>
-    /// The overall birate
-    /// </summary>
-    public ulong BitRate { get; private set; }
-
-    /// <summary>
-    /// A array of all streams
-    /// </summary>
-    public FFMediaStream[]? Streams { get; private set; }
 
     private T? GetItem<T>(string name, JObject json)
     {
