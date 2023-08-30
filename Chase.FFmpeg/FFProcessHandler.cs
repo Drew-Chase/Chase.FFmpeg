@@ -1,4 +1,11 @@
-﻿using Chase.FFmpeg.Downloader;
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
+using Chase.FFmpeg.Downloader;
 using Chase.FFmpeg.Events;
 using Chase.FFmpeg.Info;
 using System.Diagnostics;
@@ -11,8 +18,6 @@ namespace Chase.FFmpeg;
 /// </summary>
 public static class FFProcessHandler
 {
-
-
     /// <summary>
     /// Executes a command to the ffmpeg executable
     /// </summary>
@@ -31,7 +36,7 @@ public static class FFProcessHandler
         {
             StartInfo = new()
             {
-                FileName = FFmpegDownloader.Instance.FFmpegExecutable,
+                FileName = FFmpegDownloader.Instance.LoadedInstallation.FFmpeg,
                 Arguments = arguments,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
@@ -59,7 +64,7 @@ public static class FFProcessHandler
                         {
                             try
                             {
-                                string? t = matchObject.ToString().Trim().Replace(" ", "");
+                                string t = matchObject?.ToString()?.Trim().Replace(" ", "") ?? "";
                                 string[] parts = t.Split('=');
                                 if (parts.Length == 2)
                                 {
@@ -68,19 +73,25 @@ public static class FFProcessHandler
                                         case "frame":
                                             FramesProcessed = Convert.ToUInt32(parts[1]);
                                             break;
+
                                         case "fps":
                                             break;
+
                                         case "size":
                                             break;
+
                                         case "time":
                                             break;
+
                                         case "bitrate":
                                             string d = parts[1].Replace("kbits/s", "");
                                             AverageBitrate = Convert.ToSingle(parts[1].Replace("kbits/s", ""));
                                             break;
+
                                         case "speed":
                                             Speed = Convert.ToSingle(parts[1].Trim('x'));
                                             break;
+
                                         default: break;
                                     }
                                 }
@@ -102,6 +113,25 @@ public static class FFProcessHandler
         if (auto_start)
         {
             process.Start();
+            try
+            {
+                AppDomain.CurrentDomain.ProcessExit += (s, e) =>
+                {
+                    try
+                    {
+                        if (process != null && !process.HasExited)
+                            process?.Kill();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR: {ex.Message}");
+                    }
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR: {e.Message}");
+            }
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
             process.WaitForExit();
@@ -121,12 +151,11 @@ public static class FFProcessHandler
     {
         try
         {
-
             Process process = new()
             {
                 StartInfo = new()
                 {
-                    FileName = FFmpegDownloader.Instance.FFprobeExecutable,
+                    FileName = FFmpegDownloader.Instance.LoadedInstallation.FFProbe,
                     Arguments = arguments,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
