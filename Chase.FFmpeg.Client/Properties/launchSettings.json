@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Chase.FFmpeg.Client": {
+      "commandName": "Project",
+      "commandLineArgs": "-hwaccel auto -i \"C:\\Users\\drew_\\SynologyDrive\\Videos\\Recordings\\Hardcore Minecraft Part 2.mp4\" -c:v h264_nvenc -c:a aac -vf \"scale=1024:-1\" \"C:\\Users\\drew_\\SynologyDrive\\Videos\\Recordings\\test.mp4\""
+    }
+  }
+}
