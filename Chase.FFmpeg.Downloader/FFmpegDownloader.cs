@@ -1,5 +1,13 @@
-﻿using Chase.FFmpeg.Downloader.Networking;
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
+using Chase.FFmpeg.Downloader.Networking;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.IO.Compression;
 
 namespace Chase.FFmpeg.Downloader;
@@ -13,23 +21,60 @@ public sealed class FFmpegDownloader
     /// Singleton pattern for FFmpegDownloader
     /// </summary>
     public static readonly FFmpegDownloader Instance = Instance ??= new();
+
     private string _directory = "", _version = "";
-    /// <summary>
-    /// The absolute path to the ffmpeg executable<br />
-    /// <code>Example: /path/to/ffmpeg.exe</code>
-    /// </summary>
-    public string FFmpegExecutable { get; private set; } 
+
+    public FFInstallation LoadedInstallation { get; private set; }
+
+    private FFmpegDownloader()
+    {
+        LoadedInstallation = new FFInstallation
+        {
+            FFmpeg = GetFromEnvironment("ffmpeg") ?? "",
+            FFPlay = GetFromEnvironment("ffplay") ?? "",
+            FFProbe = GetFromEnvironment("ffprobe") ?? "",
+            Version = GetCurrentVersion() ?? "",
+        };
+    }
 
     /// <summary>
-    /// The currently installed version of ffmpeg
+    /// Gets the path of the command executable.
     /// </summary>
-    public string FFmpegVersion { get; private set; } = "";
+    /// <param name="cmd"></param>
+    /// <returns></returns>
+    public static string? GetFromEnvironment(string cmd)
+    {
+        string? result = null;
+        string whichCommand = OperatingSystem.IsWindows() ? "where" : "which";
 
-    /// <summary>
-    /// The absolute path to the ffprobe executable<br />
-    /// <code>Example: /path/to/ffprobe.exe</code>
-    /// </summary>
-    public string FFprobeExecutable { get; private set; }
+        using Process process = new();
+        process.StartInfo = new()
+        {
+            FileName = whichCommand,
+            Arguments = cmd,
+            RedirectStandardError = true,
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        };
+
+        process.EnableRaisingEvents = true;
+        process.OutputDataReceived += (sender, args) =>
+        {
+            if (args.Data != null)
+            {
+                result = args.Data;
+            }
+        };
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        process.WaitForExit();
+
+        return result;
+    }
+
     /// <summary>
     /// Gets the current version or creates a version file if none is found.
     /// </summary>
@@ -55,15 +100,15 @@ public sealed class FFmpegDownloader
     }
 
     /// <summary>
-    /// Downloads the latest version of ffmpeg if one is needed. <br /> Otherwise does nothing...
+    /// Downloads the latest version of ffmpeg if one is needed. <br/> Otherwise does nothing...
     /// </summary>
     /// <param name="directory"></param>
     /// <returns></returns>
-    public async Task GetLatest(string directory)
+    public async Task<FFInstallation> GetLatest(string directory)
     {
         _directory = directory = Directory.CreateDirectory(directory).FullName;
         _version = Path.Combine(directory, "version.json");
-        FFmpegVersion = FFUrlParser.Instance.Version;
+        LoadedInstallation.Version = FFUrlParser.Instance.Version;
         if (File.Exists(_version))
         {
             // Checks if the remote version is different from the local one...
@@ -71,6 +116,7 @@ public sealed class FFmpegDownloader
             {
                 bool _ffmpeg_exists = Directory.GetFiles(directory, "ffmpeg*", SearchOption.TopDirectoryOnly).Any();
                 bool _ffprobe_exists = Directory.GetFiles(directory, "ffprobe*", SearchOption.TopDirectoryOnly).Any();
+                bool _ffplay_exists = Directory.GetFiles(directory, "ffplay*", SearchOption.TopDirectoryOnly).Any();
                 if (_ffmpeg_exists)
                 {
                     File.Delete(Directory.GetFiles(directory, "ffmpeg*", SearchOption.TopDirectoryOnly).First());
@@ -79,35 +125,45 @@ public sealed class FFmpegDownloader
                 {
                     File.Delete(Directory.GetFiles(directory, "ffprobe*", SearchOption.TopDirectoryOnly).First());
                 }
+                if (_ffplay_exists)
+                {
+                    File.Delete(Directory.GetFiles(directory, "ffplay*", SearchOption.TopDirectoryOnly).First());
+                }
             }
         }
 
         bool ffmpeg_exists = Directory.GetFiles(directory, "ffmpeg*", SearchOption.TopDirectoryOnly).Any();
         bool ffprobe_exists = Directory.GetFiles(directory, "ffprobe*", SearchOption.TopDirectoryOnly).Any();
+        bool ffplay_exists = Directory.GetFiles(directory, "ffplay*", SearchOption.TopDirectoryOnly).Any();
 
-        if (!ffmpeg_exists)
+        if (!ffmpeg_exists && FFUrlParser.Instance.FFmpeg != null)
         {
             string ffmpeg_archive = await GetArchive(FFUrlParser.Instance.FFmpeg);
-            Unzip(ffmpeg_archive);
+            LoadedInstallation.FFmpeg = Unzip(ffmpeg_archive);
         }
-        if (!ffprobe_exists)
+        if (!ffprobe_exists && FFUrlParser.Instance.FFprobe != null)
         {
             string ffprobe_archive = await GetArchive(FFUrlParser.Instance.FFprobe);
-            Unzip(ffprobe_archive);
+            LoadedInstallation.FFProbe = Unzip(ffprobe_archive);
+        }
+        if (!ffplay_exists && FFUrlParser.Instance.FFPlay != null)
+        {
+            string ffplay_archive = await GetArchive(FFUrlParser.Instance.FFPlay);
+            LoadedInstallation.FFPlay = Unzip(ffplay_archive);
         }
 
         CreateVersionFile();
 
-        FFmpegExecutable = Directory.GetFiles(directory, "ffmpeg*", SearchOption.TopDirectoryOnly).First();
-        FFprobeExecutable = Directory.GetFiles(directory, "ffprobe*", SearchOption.TopDirectoryOnly).First();
+        return LoadedInstallation;
     }
 
     /// <summary>
     /// Unzips archive in-place.
     /// </summary>
     /// <param name="archive"></param>
-    private static void Unzip(string archive)
+    private static string Unzip(string archive)
     {
+        string path = "";
         using (FileStream fs = new(archive, FileMode.Open, FileAccess.Read, FileShare.Read))
         {
             using ZipArchive zip = new(fs, ZipArchiveMode.Read, false);
@@ -115,9 +171,11 @@ public sealed class FFmpegDownloader
             if (parentInfo != null)
             {
                 zip.ExtractToDirectory(parentInfo.FullName);
+                path = Path.Combine(parentInfo.FullName, zip.Entries.First().FullName);
             }
         }
         File.Delete(archive);
+        return path;
     }
 
     /// <summary>
