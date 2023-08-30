@@ -18,7 +18,16 @@
     <PackageReleaseNotes>added support to search for existing installations for linux and osx
 </PackageReleaseNotes>
     <PackageTags>ffmpeg;chase;ffprobe;ffplay;wrapper;</PackageTags>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
