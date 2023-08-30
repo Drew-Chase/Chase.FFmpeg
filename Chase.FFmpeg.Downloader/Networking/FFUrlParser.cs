@@ -1,20 +1,26 @@
-﻿using Chase.FFmpeg.Downloader.Environment;
+﻿// LFInteractive LLC. 2021-2024﻿
+using Chase.FFmpeg.Downloader.Environment;
 using Newtonsoft.Json.Linq;
 
 namespace Chase.FFmpeg.Downloader.Networking;
 
 internal sealed class FFUrlParser
 {
-    public readonly static FFUrlParser Instance = Instance ??= new();
-    public readonly Uri FFmpeg, FFprobe;
+    public static readonly FFUrlParser Instance = Instance ??= new();
+    public readonly Uri? FFmpeg, FFprobe, FFPlay;
     public readonly string Version;
+
     private FFUrlParser()
     {
         JObject json = GetJson();
 
-        Version = (string)json["version"];
-        FFmpeg = new((string)json["bin"][FFOSProvider.Name]["ffmpeg"]);
-        FFprobe = new((string)json["bin"][FFOSProvider.Name]["ffprobe"]);
+        Version = json["version"]?.ToObject<string>() ?? "";
+        FFmpeg = json["bin"]?[FFOSProvider.Name]?["ffmpeg"]?.ToObject<Uri>();
+        FFprobe = json["bin"]?[FFOSProvider.Name]?["ffprobe"]?.ToObject<Uri>();
+        if (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS())
+        {
+            FFPlay = json["bin"]?[FFOSProvider.Name]?["ffplay"]?.ToObject<Uri>();
+        }
     }
 
     private JObject GetJson()
@@ -28,5 +34,4 @@ internal sealed class FFUrlParser
         }
         throw new System.Net.WebException($"FFBinaries api returned with status code {message.StatusCode}");
     }
-
 }
