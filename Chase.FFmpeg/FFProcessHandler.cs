@@ -37,7 +37,7 @@ public static class FFProcessHandler
             StartInfo = new()
             {
                 FileName = FFmpegDownloader.Instance.LoadedInstallation.FFmpeg,
-                Arguments = arguments,
+                Arguments = "-hide_banner " + arguments,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
             },
@@ -122,20 +122,17 @@ public static class FFProcessHandler
                         if (process != null && !process.HasExited)
                             process?.Kill();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Console.WriteLine($"ERROR: {ex.Message}");
                     }
                 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine($"ERROR: {e.Message}");
             }
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
             process.WaitForExit();
-            process.Close();
         }
 
         return process;
