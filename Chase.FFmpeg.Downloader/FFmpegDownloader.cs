@@ -24,6 +24,9 @@ public sealed class FFmpegDownloader
 
     private string _directory = "", _version = "";
 
+    /// <summary>
+    /// The current loaded ffmpeg installation, see: <seealso cref="GetLatest(string)"/>
+    /// </summary>
     public FFInstallation LoadedInstallation { get; private set; }
 
     private FFmpegDownloader()
@@ -53,7 +56,7 @@ public sealed class FFmpegDownloader
         {
             using FileStream fs = new(Path.Combine(_directory, "version.json"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using StreamReader reader = new(fs);
-            return (string)JObject.Parse(reader.ReadToEnd())["version"];
+            return JObject.Parse(reader.ReadToEnd())?["version"]?.ToObject<string>() ?? "";
         }
         catch
         {
