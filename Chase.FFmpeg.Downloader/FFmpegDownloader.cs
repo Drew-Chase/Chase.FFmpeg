@@ -38,44 +38,6 @@ public sealed class FFmpegDownloader
     }
 
     /// <summary>
-    /// Gets the path of the command executable.
-    /// </summary>
-    /// <param name="cmd"></param>
-    /// <returns></returns>
-    public static string? GetFromEnvironment(string cmd)
-    {
-        string? result = null;
-        string whichCommand = OperatingSystem.IsWindows() ? "where" : "which";
-
-        using Process process = new();
-        process.StartInfo = new()
-        {
-            FileName = whichCommand,
-            Arguments = cmd,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true,
-        };
-
-        process.EnableRaisingEvents = true;
-        process.OutputDataReceived += (sender, args) =>
-        {
-            if (args.Data != null)
-            {
-                result = args.Data;
-            }
-        };
-
-        process.Start();
-        process.BeginOutputReadLine();
-        process.BeginErrorReadLine();
-        process.WaitForExit();
-
-        return result;
-    }
-
-    /// <summary>
     /// Gets the current version or creates a version file if none is found.
     /// </summary>
     /// <returns></returns>
@@ -155,6 +117,44 @@ public sealed class FFmpegDownloader
         CreateVersionFile();
 
         return LoadedInstallation;
+    }
+
+    /// <summary>
+    /// Gets the path of the command executable.
+    /// </summary>
+    /// <param name="cmd"></param>
+    /// <returns></returns>
+    private static string? GetFromEnvironment(string cmd)
+    {
+        string? result = null;
+        string whichCommand = OperatingSystem.IsWindows() ? "where" : "which";
+
+        using Process process = new();
+        process.StartInfo = new()
+        {
+            FileName = whichCommand,
+            Arguments = cmd,
+            RedirectStandardError = true,
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        };
+
+        process.EnableRaisingEvents = true;
+        process.OutputDataReceived += (sender, args) =>
+        {
+            if (args.Data != null)
+            {
+                result = args.Data;
+            }
+        };
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        process.WaitForExit();
+
+        return result;
     }
 
     /// <summary>
