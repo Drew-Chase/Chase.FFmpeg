@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Chase.FFmpeg\Chase.FFmpeg.csproj" />
+  </ItemGroup>
+
 </Project>
