@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chase.FFmpeg", "Chase.FFmpe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chase.FFmpeg.Downloader", "Chase.FFmpeg.Downloader\Chase.FFmpeg.Downloader.csproj", "{D5C01FEB-1930-4BEC-BBB0-AAD67F8FE4E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chase.FFmpeg.Extra", "Chase.FFmpeg.Extra\Chase.FFmpeg.Extra.csproj", "{B6D52D7E-CCC8-458A-9FAF-7921406248DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chase.FFmpeg.Extra", "Chase.FFmpeg.Extra\Chase.FFmpeg.Extra.csproj", "{B6D52D7E-CCC8-458A-9FAF-7921406248DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chase.FFmpeg.Client", "Chase.FFmpeg.Client\Chase.FFmpeg.Client.csproj", "{F37234AE-9976-4D6A-8CCC-D81CEE8655EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chase.FFmpeg.Capture", "Chase.FFmpeg.Capture\Chase.FFmpeg.Capture.csproj", "{A162E56E-01D2-42D2-8B8C-F86DB633809F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{B6D52D7E-CCC8-458A-9FAF-7921406248DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D52D7E-CCC8-458A-9FAF-7921406248DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D52D7E-CCC8-458A-9FAF-7921406248DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F37234AE-9976-4D6A-8CCC-D81CEE8655EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F37234AE-9976-4D6A-8CCC-D81CEE8655EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F37234AE-9976-4D6A-8CCC-D81CEE8655EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F37234AE-9976-4D6A-8CCC-D81CEE8655EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A162E56E-01D2-42D2-8B8C-F86DB633809F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A162E56E-01D2-42D2-8B8C-F86DB633809F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A162E56E-01D2-42D2-8B8C-F86DB633809F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A162E56E-01D2-42D2-8B8C-F86DB633809F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
