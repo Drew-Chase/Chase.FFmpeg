@@ -1,4 +1,10 @@
-﻿
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
 using Chase.FFmpeg.Info;
 using System.Collections.Concurrent;
 
@@ -6,7 +12,6 @@ namespace Chase.FFmpeg.Extra;
 
 internal static class FFDirectoryUtility
 {
-
     public static ICollection<string> GetFiles(string path, bool recursive, Func<string, bool> comparison)
     {
         List<string> files = new();
@@ -36,6 +41,7 @@ internal static class FFDirectoryUtility
 
         return files;
     }
+
     public static ICollection<string> GetFilesAsync(string path, bool recursive, Func<string, bool> comparison)
     {
         List<string> files = new();

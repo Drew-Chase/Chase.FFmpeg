@@ -1,6 +1,14 @@
-﻿using Chase.FFmpeg.Info;
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
+using Chase.FFmpeg.Info;
 
 namespace Chase.FFmpeg.Extra;
+
 /// <summary>
 /// Static methods for handling audio files
 /// </summary>
@@ -20,12 +28,14 @@ public static class FFAudioUtility
     public static ICollection<FFMediaInfo> GetMediaFiles(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFiles(path, recursive, item => HasAudioExtension(item));
 
     /// <summary>
-    /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
+    /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso>
+    /// in specified directory
     /// </summary>
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
     /// <returns></returns>
     public static ICollection<FFMediaInfo> GetMediaFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFilesAsync(path, recursive, item => HasAudioExtension(item));
+
     /// <summary>
     /// Gets all files with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
     /// </summary>
@@ -35,7 +45,8 @@ public static class FFAudioUtility
     public static ICollection<string> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasAudioExtension(item));
 
     /// <summary>
-    /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso> in specified directory
+    /// Gets all files asynchronous with <seealso cref="audio_extension">Audio Extension</seealso>
+    /// in specified directory
     /// </summary>
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
@@ -43,7 +54,8 @@ public static class FFAudioUtility
     public static ICollection<string> GetFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetFilesAsync(path, recursive, item => HasAudioExtension(item));
 
     /// <summary>
-    /// Checks if file has a extension matching the <seealso cref="audio_extension">Audio Extensions</seealso> array
+    /// Checks if file has a extension matching the <seealso cref="audio_extension">Audio
+    /// Extensions</seealso> array
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>

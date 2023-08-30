@@ -1,4 +1,9 @@
-﻿// LFInteractive LLC. - All Rights Reserved
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
 
 using Chase.FFmpeg.Info;
 
@@ -23,7 +28,8 @@ public static class FFVideoUtility
     public static ICollection<string> GetFiles(string path, bool recursive = false) => FFDirectoryUtility.GetFiles(path, recursive, item => HasVideoExtension(item));
 
     /// <summary>
-    /// Gets all files asynchronous with <seealso cref="video_extension">Video Extension</seealso> in specified directory
+    /// Gets all files asynchronous with <seealso cref="video_extension">Video Extension</seealso>
+    /// in specified directory
     /// </summary>
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
@@ -39,7 +45,8 @@ public static class FFVideoUtility
     public static ICollection<FFMediaInfo> GetMediaFiles(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFiles(path, recursive, item => HasVideoExtension(item));
 
     /// <summary>
-    /// Gets all files asynchronous with <seealso cref="video_extension">Video Extension</seealso> in specified directory
+    /// Gets all files asynchronous with <seealso cref="video_extension">Video Extension</seealso>
+    /// in specified directory
     /// </summary>
     /// <param name="path">The starting path</param>
     /// <param name="recursive">If the search should look through all subdirectories</param>
@@ -47,7 +54,8 @@ public static class FFVideoUtility
     public static ICollection<FFMediaInfo> GetMediaFilesAsync(string path, bool recursive = false) => FFDirectoryUtility.GetMediaFilesAsync(path, recursive, item => HasVideoExtension(item));
 
     /// <summary>
-    /// Checks if file has a extension matching the <seealso cref="video_extension">Video Extensions</seealso> array
+    /// Checks if file has a extension matching the <seealso cref="video_extension">Video
+    /// Extensions</seealso> array
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>

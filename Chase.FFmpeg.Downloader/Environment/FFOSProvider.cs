@@ -1,4 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿/*
+    Chase FFmpeg - LFInteractive LLC. 2021-2024
+    Chase FFmpeg is a ffmpeg wrapper for c#. Includes the ability to download, execute and manipulate ffmpeg, ffprobe and ffplay.
+    Licensed under GPL-3.0
+    https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
+*/
+
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Chase.FFmpeg.Downloader.Environment;
@@ -8,7 +15,6 @@ namespace Chase.FFmpeg.Downloader.Environment;
 /// </summary>
 internal static class FFOSProvider
 {
-
     /// <summary>
     /// If the processor is Intel i386 32 bit processor
     /// </summary>
@@ -67,7 +73,6 @@ internal static class FFOSProvider
             {
                 name.Append("osx");
             }
-
 
             if (Is64)
             {
