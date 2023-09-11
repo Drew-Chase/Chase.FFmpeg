@@ -202,6 +202,20 @@ public sealed class FFMuxedConverter
     }
 
     /// <summary>
+    /// Changes the dialog audio boost <br/><br/> FFMpeg argument: <b>-filter:a "volume={volume}"</b>
+    /// </summary>
+    /// <param name="original">The base audio multiplier, default is 1 max is 3 minimum is 0</param>
+    /// <param name="enhanced">The enhancement multiplier, default is 1 max is 3 minimum is 0</param>
+    /// <param name="voice">The voice boost amount, default is 2 max is 32</param>
+    /// <param name="normalize">If the audio should be normalized</param>
+    /// <returns></returns>
+    public FFMuxedConverter ChangeDialogAudioBoost(float original = 1, float enhanced = 1, float voice = 2, bool normalize = true)
+    {
+        _postInputBuilder.Append($"-filter_complex \"[0:a]dialoguenhance=original={original}:enhance={enhanced}:voice={voice}{(normalize ? ", dynaudnorm[aout]\" -map \"[aout]" : "")}\" -map 0:v");
+        return this;
+    }
+
+    /// <summary>
     /// Changes the the duration of the video <br/><br/> FFMpeg argument: <b>-t {position}</b>
     /// </summary>
     /// <param name="position"></param>
