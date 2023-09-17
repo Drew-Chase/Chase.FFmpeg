@@ -21,10 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CLMath" Version="0.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Chase.FFmpeg.Downloader\Chase.FFmpeg.Downloader.csproj" />
   </ItemGroup>
 
