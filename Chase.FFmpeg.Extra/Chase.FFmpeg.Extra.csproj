@@ -1,35 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Chase.FFmpeg.Extras</Title>
-    <Company>Drew Chase</Company>
-    <Authors>Drew Chase</Authors>
-    <Description>Adds extra functionality to Chase.FFmpeg</Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
-    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <FileVersion>$(PackageVersion)</FileVersion>
-    <Version>0.0.7</Version>
-    <PackageReleaseNotes>
-      Updated video extensions list
-    </PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Chase.FFmpeg.Extras</Title>
+		<Company>Drew Chase</Company>
+		<Authors>Drew Chase</Authors>
+		<Description>Adds extra functionality to Chase.FFmpeg</Description>
+		<PackageProjectUrl></PackageProjectUrl>
+		<RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
+		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+		<FileVersion>$(PackageVersion)</FileVersion>
+		<Version>0.0.7</Version>
+		<PackageReleaseNotes>
+			Updated video extensions list
+		</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Chase.FFmpeg\Chase.FFmpeg.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Chase.FFmpeg\Chase.FFmpeg.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>

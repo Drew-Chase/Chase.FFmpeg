@@ -1,34 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Chase FFMPEG</Title>
-    <Company>Drew Chase</Company>
-    <Description>A ffmpeg tool for .net</Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
-    <FileVersion>$(PackageVersion)</FileVersion>
-    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
-    <Version>0.1.0</Version>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>
-      Added check for if duration or frames are not present in the stream information
-    </PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Chase FFMPEG</Title>
+		<Company>Drew Chase</Company>
+		<Description>A ffmpeg tool for .net</Description>
+		<PackageProjectUrl></PackageProjectUrl>
+		<RepositoryUrl>https://github.com/DcmanProductions/Chase.FFmpeg</RepositoryUrl>
+		<FileVersion>$(PackageVersion)</FileVersion>
+		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+		<Version>0.1.0</Version>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>
+			Added check for if duration or frames are not present in the stream information
+		</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Chase.FFmpeg.Downloader\Chase.FFmpeg.Downloader.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Chase.FFmpeg.Downloader\Chase.FFmpeg.Downloader.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
